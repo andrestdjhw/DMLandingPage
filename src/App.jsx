@@ -6,6 +6,7 @@ import emailjs from '@emailjs/browser'
 function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('inicio')
+  const [showMore, setShowMore] = useState(false);
 
   // Estado del formulario
   const [formData, setFormData] = useState({
@@ -320,18 +321,18 @@ function App() {
               </div>
             </div>
 
-            {/* Vision and Mission */}
+            {/* Vision y Mision */}
             <div className="grid md:grid-cols-2 gap-8 mt-12">
-              {/* Mission */}
+              {/* Mision */}
               <div className="bg-white p-8 rounded-lg shadow-md">
                 <div className="flex items-center mb-4">
                   <FaBullseye className="text-yellow-400 text-3xl mr-4" />
                   <h3 className="text-2xl font-bold">Misión</h3>
                 </div>
                 <p className="text-gray-600 pl-12">
-                  Ofrecer servicios de la más alta calidad en los campos Contable, financiero, auditoría externa, 
-                  auditoria forense, auditoría interna, asesoría gerencial, tributaria y de Sistemas, dentro de un marco de ética, objetividad, 
-                  integridad, idoneidad e independencia mental, aplicando técnicas modernas de trabajo y 
+                  Ofrecer servicios de la más alta calidad en los campos Contable, financiero, auditoría externa,
+                  auditoria forense, auditoría interna, asesoría gerencial, tributaria y de Sistemas, dentro de un marco de ética, objetividad,
+                  integridad, idoneidad e independencia mental, aplicando técnicas modernas de trabajo y
                   metodologías creativas para lograr un mejor impacto en la gestión de las empresas y su rentabilidad.
                 </p>
               </div>
@@ -343,7 +344,7 @@ function App() {
                   <h3 className="text-2xl font-bold">Visión</h3>
                 </div>
                 <p className="text-gray-600 pl-12">
-                  Ser una empresa líder en el mercado de la auditoría y consultoría con excelencia competitiva, 
+                  Ser una empresa líder en el mercado de la auditoría y consultoría con excelencia competitiva,
                   logrando la mayor satisfacción en servicios para nuestros clientes.
                 </p>
               </div>
@@ -380,8 +381,15 @@ function App() {
                             Instalación y mantenimiento de Software de Prevención de Lavado de Activos y Financiamiento del Terrorismo (PLA/FT) ."
               />
               <ServiceCard
-                title="Derecho Inmobiliario"
-                description="Transacciones de bienes raíces y contratos de arrendamiento."
+                title="Auditorias y consultorías"
+                description="Auditorías Financieras con opinión de auditores independientes.
+                             Servicios de Auditoría Interna para las empresas
+                             Auditorías Especiales.
+                             Auditoría Forense
+                             Organización Administrativa y Financiera.
+                             Servicios de Contabilidad
+                             Precios de Transferencia
+                             Auditoría Fiscal "
               />
             </div>
           </div>
@@ -391,6 +399,48 @@ function App() {
         <section id="nosotros" className="py-16 bg-gray-50">
           <div className="container mx-auto px-4">
             <h2 className="text-3xl font-bold text-center mb-12 font-serif">Nuestro Equipo</h2>
+            <div className="bg-white rounded-lg shadow-md p-6 mb-12">
+              <p className="text-gray-700 mb-6">
+                DELGADO MARADIAGA Y ASOCIADOS S.DE R.L. tiene el agrado de presentar nuestro nuevo sitio Web,
+                con el pretendemos aprovechar las ventajas de las nuevas tecnologías a favor de nuestros clientes,
+                convirtiéndose para nosotros en un gran logro cualitativo en la gestión empresarial en todos los niveles.
+              </p>
+
+              <p className="text-gray-700 mb-6">
+                La empresa opera en Honduras como una Sociedad de Responsabilidad Limitada siendo constituida en escritura pública
+                No.486 el 4 de Agosto de 2003, inscrita en el Registro Mercantil con el No.24 Tomo 544 del Registro de Sociedades
+                Mercantiles de Tegucigalpa y en el Registro de La Cámara de Comercio e Industrias de Tegucigalpa con el No. 9982, Folio
+                5245 Tomo IV de fecha 22 de Septiembre de 2003.
+              </p>
+
+              <div className="mb-4">
+                <h3 className="text-xl font-bold mb-4">Acreditaciones</h3>
+                <p className="text-gray-700 mb-4">En la actualidad nuestra empresa está inscrita en las siguientes instituciones:</p>
+                <ul className="list-disc pl-6 text-gray-700 space-y-2">
+                  <li>Colegio Hondureño de Profesionales Universitarios en Contaduría Pública, bajo el No.05-03-046.</li>
+                  <li>Comisión Nacional de Bancos y Seguros, calificados en categoría "B".</li>
+                  <li>Consejo Nacional Supervisor de Cooperativas (CONSUCOOP) Calificados en categoría "A".</li>
+                  <li>Cámara de Comercio e Industria de Tegucigalpa (CCIT) bajo el No.4352.</li>
+                  <li>Asociación de Firmas de Auditoría (socios fundadores), integrados al régimen de control de calidad.</li>
+                </ul>
+              </div>
+
+              {showMore && (
+                <div className="mt-4">
+                  <p className="text-gray-700 mb-4">
+                    Nuestra firma se distingue por ofrecer servicios profesionales de alta calidad,
+                    respaldados por nuestra extensa experiencia y compromiso con la excelencia.
+                  </p>
+                </div>
+              )}
+
+              <button
+                onClick={() => setShowMore(!showMore)}
+                className="mt-4 text-blue-600 hover:text-blue-800 font-medium"
+              >
+                {showMore ? "Ver menos" : "Ver más"}
+              </button>
+            </div>
             <div className="grid md:grid-cols-3 gap-8">
               <TeamMember
                 name="Licenciado Ramon Maradiaga"
@@ -560,9 +610,9 @@ function App() {
               <h4 className="font-bold mb-4 text-yellow-400">Servicios</h4>
               <ul className="space-y-2">
                 <li>Ingenieria en Sistemas</li>
-                <li>Auditoria</li>
+                <li>Auditoria Interna</li>
                 <li>Servicios Asociados</li>
-                <li>Propiedad Intelectual</li>
+                <li>Implementaciones Tecnologicas</li>
               </ul>
             </div>
             <div>
