@@ -1,10 +1,40 @@
-import { useState } from 'react'
+// Modified App.jsx with EmailJS implementation
+
+import { useState, useEffect } from 'react'
 import { FaBalanceScale, FaGavel, FaHandshake, FaBook, FaPhone, FaMapMarkerAlt, FaEnvelope, FaClock } from 'react-icons/fa'
 import { FiMenu, FiX } from 'react-icons/fi'
+import emailjs from '@emailjs/browser'
 
 function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('inicio')
+  
+  // Form state
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    message: ''
+  })
+  
+  const [formStatus, setFormStatus] = useState({
+    submitting: false,
+    success: null,
+    error: null
+  })
+  
+  const [formErrors, setFormErrors] = useState({
+    name: null,
+    email: null,
+    phone: null,
+    message: null
+  })
+
+  // Initialize EmailJS once when component mounts
+  useEffect(() => {
+    // Reemplazar 'YOUR_PUBLIC_KEY' con tu actual EmailJS public key
+    emailjs.init("NPFppts74nYqJf4Ci");
+  }, []);
 
   const toggleMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen)
@@ -18,6 +48,129 @@ function App() {
       setMobileMenuOpen(false)
     }
   }
+
+  // Form validation function
+  const validateForm = (data) => {
+    const errors = {};
+    
+    // Name validation
+    if (!data.name.trim()) {
+      errors.name = 'El nombre es requerido';
+    }
+    
+    // Email validation
+    if (!data.email.trim()) {
+      errors.email = 'El correo electrónico es requerido';
+    } else {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(data.email.trim())) {
+        errors.email = 'Por favor ingrese un correo electrónico válido';
+      }
+    }
+    
+    // Message validation
+    if (!data.message.trim()) {
+      errors.message = 'El mensaje es requerido';
+    }
+    
+    return errors;
+  };
+
+  const handleInputChange = (e) => {
+    const { id, value } = e.target;
+    setFormData(prevData => ({
+      ...prevData,
+      [id]: value
+    }));
+    
+    // Clear error when user starts typing
+    if (formErrors[id]) {
+      setFormErrors(prev => ({
+        ...prev,
+        [id]: null
+      }));
+    }
+  };
+  
+  const handleBlur = (e) => {
+    const { id, value } = e.target;
+    
+    // Validate just this field on blur
+    const fieldErrors = validateForm({
+      ...formData,
+      [id]: value
+    });
+    
+    if (fieldErrors[id]) {
+      setFormErrors(prev => ({
+        ...prev,
+        [id]: fieldErrors[id]
+      }));
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    
+    // Validate all form fields
+    const errors = validateForm(formData);
+    
+    // If there are errors, display them and stop submission
+    if (Object.keys(errors).length > 0) {
+      setFormErrors(errors);
+      setFormStatus({
+        submitting: false,
+        success: null,
+        error: 'Por favor corrija los errores en el formulario.'
+      });
+      return;
+    }
+    
+    setFormStatus({
+      submitting: true,
+      success: null,
+      error: null
+    });
+
+    // EmailJS Configuracion
+    // Reemplace estos valores por su actual EmailJS service ID and template ID
+    const serviceId = 'service_ozy7fik';
+    const templateId = 'template_f2fqs41';
+
+    // Prepare template parameters
+    const templateParams = {
+      from_name: formData.name,
+      reply_to: formData.email,
+      phone: formData.phone || 'No proporcionado',
+      message: formData.message
+    };
+
+    try {
+      // Send email using EmailJS
+      await emailjs.send(serviceId, templateId, templateParams);
+      
+      setFormStatus({
+        submitting: false,
+        success: 'Mensaje enviado correctamente. Nos pondremos en contacto pronto.',
+        error: null
+      });
+      
+      // Reset form
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        message: ''
+      });
+    } catch (error) {
+      console.error('Error al enviar el formulario:', error);
+      setFormStatus({
+        submitting: false,
+        success: null,
+        error: 'Error al enviar el mensaje. Por favor intente nuevamente.'
+      });
+    }
+  };
 
   return (
     <div className="min-h-screen flex flex-col font-sans">
@@ -215,7 +368,7 @@ function App() {
           </div>
         </section>
 
-        {/* Contacto Section */}
+        {/* Contacto Section - UPDATED WITH EMAILJS */}
         <section id="contacto" className="py-16 bg-gray-900 text-white">
           <div className="container mx-auto px-4">
             <h2 className="text-3xl font-bold text-center mb-12 font-serif">Contáctenos</h2>
@@ -243,48 +396,103 @@ function App() {
               </div>
               <div>
                 <h3 className="text-xl font-bold mb-4">Envíenos un Mensaje</h3>
-                <form className="space-y-4">
+                <form className="space-y-4" onSubmit={handleSubmit}>
                   <div>
-                    <label htmlFor="name" className="block mb-1">Nombre</label>
+                    <label htmlFor="name" className="block mb-1">Nombre <span className="text-red-500">*</span></label>
                     <input
                       type="text"
                       id="name"
-                      className="w-full px-4 py-2 border-amber-400 rounded text-gray-800 bg-amber-50"
+                      className={`w-full px-4 py-2 rounded text-gray-800 bg-amber-50 ${
+                        formErrors.name ? 'border-2 border-red-500' : 'border-amber-400'
+                      }`}
                       placeholder="Su nombre"
+                      value={formData.name}
+                      onChange={handleInputChange}
+                      onBlur={handleBlur}
+                      required
                     />
+                    {formErrors.name && (
+                      <p className="text-red-500 text-sm mt-1">{formErrors.name}</p>
+                    )}
                   </div>
+                  
                   <div>
-                    <label htmlFor="email" className="block mb-1">Correo Electrónico</label>
+                    <label htmlFor="email" className="block mb-1">Correo Electrónico <span className="text-red-500">*</span></label>
                     <input
                       type="email"
                       id="email"
-                      className="w-full px-4 py-2 rounded text-gray-800 bg-amber-50"
+                      className={`w-full px-4 py-2 rounded text-gray-800 bg-amber-50 ${
+                        formErrors.email ? 'border-2 border-red-500' : 'border-amber-400'
+                      }`}
                       placeholder="Su email"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      onBlur={handleBlur}
+                      required
                     />
+                    {formErrors.email && (
+                      <p className="text-red-500 text-sm mt-1">{formErrors.email}</p>
+                    )}
                   </div>
+                  
                   <div>
                     <label htmlFor="phone" className="block mb-1">Teléfono</label>
                     <input
                       type="tel"
                       id="phone"
-                      className="w-full px-4 py-2 rounded text-gray-800 bg-amber-50"
+                      className={`w-full px-4 py-2 rounded text-gray-800 bg-amber-50 ${
+                        formErrors.phone ? 'border-2 border-red-500' : 'border-amber-400'
+                      }`}
                       placeholder="Su teléfono"
+                      value={formData.phone}
+                      onChange={handleInputChange}
+                      onBlur={handleBlur}
                     />
+                    {formErrors.phone && (
+                      <p className="text-red-500 text-sm mt-1">{formErrors.phone}</p>
+                    )}
                   </div>
+                  
                   <div>
-                    <label htmlFor="message" className="block mb-1">Mensaje</label>
+                    <label htmlFor="message" className="block mb-1">Mensaje <span className="text-red-500">*</span></label>
                     <textarea
                       id="message"
                       rows="4"
-                      className="w-full px-4 py-2 rounded text-gray-800 bg-amber-50"
+                      className={`w-full px-4 py-2 rounded text-gray-800 bg-amber-50 ${
+                        formErrors.message ? 'border-2 border-red-500' : 'border-amber-400'
+                      }`}
                       placeholder="Su mensaje"
+                      value={formData.message}
+                      onChange={handleInputChange}
+                      onBlur={handleBlur}
+                      required
                     ></textarea>
+                    {formErrors.message && (
+                      <p className="text-red-500 text-sm mt-1">{formErrors.message}</p>
+                    )}
                   </div>
+                  
+                  {/* Form Status Messages */}
+                  {formStatus.error && (
+                    <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative">
+                      {formStatus.error}
+                    </div>
+                  )}
+                  
+                  {formStatus.success && (
+                    <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative">
+                      {formStatus.success}
+                    </div>
+                  )}
+                  
                   <button
                     type="submit"
-                    className="bg-yellow-400 hover:bg-yellow-500 text-blue-900 font-bold py-3 px-6 rounded-lg transition duration-300"
+                    className={`bg-yellow-400 hover:bg-yellow-500 text-blue-900 font-bold py-3 px-6 rounded-lg transition duration-300 ${
+                      formStatus.submitting ? 'opacity-50 cursor-not-allowed' : ''
+                    }`}
+                    disabled={formStatus.submitting}
                   >
-                    Enviar Mensaje
+                    {formStatus.submitting ? 'Enviando...' : 'Enviar Mensaje'}
                   </button>
                 </form>
               </div>
