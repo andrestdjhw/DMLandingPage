@@ -7,7 +7,7 @@ function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('inicio')
 
-  // Form state
+  // Estado del formulario
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -28,7 +28,7 @@ function App() {
     message: null
   })
 
-  // Initialize EmailJS once when component mounts
+  // Inicializa EmailJS cuando el componente es montado
   useEffect(() => {
     // Reemplazar 'YOUR_PUBLIC_KEY' con tu actual EmailJS public key
     emailjs.init("NPFppts74nYqJf4Ci");
@@ -47,16 +47,16 @@ function App() {
     }
   }
 
-  // Form validation function
+  // Funcion para validacion del formulario
   const validateForm = (data) => {
     const errors = {};
 
-    // Name validation
+    // Validacion del nombre
     if (!data.name.trim()) {
       errors.name = 'El nombre es requerido';
     }
 
-    // Email validation
+    // Validacion del correo
     if (!data.email.trim()) {
       errors.email = 'El correo electrónico es requerido';
     } else {
@@ -66,7 +66,7 @@ function App() {
       }
     }
 
-    // Message validation
+    // Validacion del mensaje
     if (!data.message.trim()) {
       errors.message = 'El mensaje es requerido';
     }
@@ -81,7 +81,7 @@ function App() {
       [id]: value
     }));
 
-    // Clear error when user starts typing
+    // Limpia los errores cuando el usuario comienza a teclear
     if (formErrors[id]) {
       setFormErrors(prev => ({
         ...prev,
@@ -93,7 +93,7 @@ function App() {
   const handleBlur = (e) => {
     const { id, value } = e.target;
 
-    // Validate just this field on blur
+    // Validar este campo solo en borroso
     const fieldErrors = validateForm({
       ...formData,
       [id]: value
@@ -110,10 +110,10 @@ function App() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Validate all form fields
+    // Validar todos los campos del formulario
     const errors = validateForm(formData);
 
-    // If there are errors, display them and stop submission
+    // Si hay errores, los muestra y cancela el envio
     if (Object.keys(errors).length > 0) {
       setFormErrors(errors);
       setFormStatus({
@@ -144,7 +144,7 @@ function App() {
     };
 
     try {
-      // Send email using EmailJS
+      // Enviar correo utilizando EmailJS
       await emailjs.send(serviceId, templateId, templateParams);
 
       setFormStatus({
@@ -153,7 +153,7 @@ function App() {
         error: null
       });
 
-      // Reset form
+      // Resetear formulario
       setFormData({
         name: '',
         email: '',
@@ -172,7 +172,7 @@ function App() {
 
   return (
     <div className="min-h-screen flex flex-col font-sans">
-      {/* Navigation */}
+      {/* Navegacion */}
       <nav className="bg-gray-900 text-white shadow-lg sticky top-0 z-50">
         <div className="container mx-auto px-4 py-3 flex justify-between items-center">
           <div className="flex items-center space-x-2">
@@ -180,7 +180,7 @@ function App() {
             <span className="text-xl font-serif font-bold">Delgado Maradiaga Y Asociados</span>
           </div>
 
-          {/* Desktop Navigation */}
+          {/* Navegacion de Escritorio */}
           <div className="hidden md:flex space-x-6">
             <button
               onClick={() => scrollToSection('inicio')}
@@ -380,7 +380,7 @@ function App() {
           </div>
         </section>
 
-        {/* Contacto Section - UPDATED WITH EMAILJS */}
+        {/* Contacto Section - Incluye implementacions EmailJS */}
         <section id="contacto" className="py-16 bg-gray-900 text-white">
           <div className="container mx-auto px-4">
             <h2 className="text-3xl font-bold text-center mb-12 font-serif">Contáctenos</h2>
@@ -480,7 +480,7 @@ function App() {
                     )}
                   </div>
 
-                  {/* Form Status Messages */}
+                  {/* Mensajes de estado del formulario */}
                   {formStatus.error && (
                     <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative">
                       {formStatus.error}
