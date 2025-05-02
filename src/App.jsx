@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { FaBalanceScale, FaGavel, FaHandshake, FaBook, FaPhone, FaMapMarkerAlt, FaEnvelope, FaClock ,FaUserShield, FaBolt } from 'react-icons/fa'
+import { FaBalanceScale, FaGavel, FaHandshake, FaBook, FaPhone, FaMapMarkerAlt, FaEnvelope, FaClock, FaUserShield, FaBolt, FaBullseye, FaEye } from 'react-icons/fa'
 import { FiMenu, FiX } from 'react-icons/fi'
 import emailjs from '@emailjs/browser'
 
@@ -280,7 +280,9 @@ function App() {
         <section id="filosofia" className="py-16 bg-gray-50 mt-20">
           <div className="container mx-auto px-4">
             <h2 className="text-3xl font-bold text-center mb-12 font-serif">Nuestra Filosofía</h2>
-            <div className="grid md:grid-cols-5 gap-6">
+
+            {/* Valores de la Matriz */}
+            <div className="grid md:grid-cols-5 gap-6 mb-16">
               <div className="bg-white p-6 rounded-lg shadow-md text-center">
                 <FaHandshake className="text-yellow-400 text-4xl mx-auto mb-4" />
                 <h3 className="text-xl font-bold mb-3">Integridad</h3>
@@ -314,6 +316,35 @@ function App() {
                 <h3 className="text-xl font-bold mb-3">Eficiencia</h3>
                 <p className="text-gray-600">
                   Optimizamos recursos y procesos para entregar soluciones de calidad en tiempo oportuno.
+                </p>
+              </div>
+            </div>
+
+            {/* Vision and Mission */}
+            <div className="grid md:grid-cols-2 gap-8 mt-12">
+              {/* Mission */}
+              <div className="bg-white p-8 rounded-lg shadow-md">
+                <div className="flex items-center mb-4">
+                  <FaBullseye className="text-yellow-400 text-3xl mr-4" />
+                  <h3 className="text-2xl font-bold">Misión</h3>
+                </div>
+                <p className="text-gray-600 pl-12">
+                  Ofrecer servicios de la más alta calidad en los campos Contable, financiero, auditoría externa, 
+                  auditoria forense, auditoría interna, asesoría gerencial, tributaria y de Sistemas, dentro de un marco de ética, objetividad, 
+                  integridad, idoneidad e independencia mental, aplicando técnicas modernas de trabajo y 
+                  metodologías creativas para lograr un mejor impacto en la gestión de las empresas y su rentabilidad.
+                </p>
+              </div>
+
+              {/* Vision */}
+              <div className="bg-white p-8 rounded-lg shadow-md">
+                <div className="flex items-center mb-4">
+                  <FaEye className="text-yellow-400 text-3xl mr-4" />
+                  <h3 className="text-2xl font-bold">Visión</h3>
+                </div>
+                <p className="text-gray-600 pl-12">
+                  Ser una empresa líder en el mercado de la auditoría y consultoría con excelencia competitiva, 
+                  logrando la mayor satisfacción en servicios para nuestros clientes.
                 </p>
               </div>
             </div>
