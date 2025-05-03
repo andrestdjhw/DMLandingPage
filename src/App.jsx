@@ -174,84 +174,88 @@ function App() {
   return (
     <div className="min-h-screen flex flex-col font-sans">
       {/* Navegacion */}
-      <nav className="bg-gray-900 text-white shadow-lg sticky top-0 z-50">
+      <nav className="bg-gray-50 text-black shadow-lg sticky top-0 z-50">
         <div className="container mx-auto px-4 py-3 flex justify-between items-center">
           <div className="flex items-center space-x-2">
-            <FaBalanceScale className="text-yellow-400 text-2xl" />
-            <span className="text-xl font-serif font-bold">Delgado Maradiaga Y Asociados</span>
+            
+            <img 
+              src="/src/assets/DMLogo.png" 
+              alt="Delgado Maradiaga y Asociados" 
+              className='h-24'
+            />
           </div>
 
           {/* Navegacion de Escritorio */}
           <div className="hidden md:flex space-x-6">
             <button
               onClick={() => scrollToSection('inicio')}
-              className={`hover:text-yellow-400 transition ${activeSection === 'inicio' ? 'text-yellow-400' : ''}`}
+              className={`hover:text-blue-900 transition ${activeSection === 'inicio' ? 'text-blue-900' : ''}`}
             >
               Inicio
             </button>
             <button
               onClick={() => scrollToSection('filosofia')}
-              className={`hover:text-yellow-400 transition ${activeSection === 'filosofia' ? 'text-yellow-400' : ''}`}
+              className={`hover:text-blue-900 transition ${activeSection === 'filosofia' ? 'text-blue-900' : ''}`}
             >
               Filosofía
             </button>
             <button
               onClick={() => scrollToSection('servicios')}
-              className={`hover:text-yellow-400 transition ${activeSection === 'servicios' ? 'text-yellow-400' : ''}`}
+              className={`hover:text-blue-900 transition ${activeSection === 'servicios' ? 'text-blue-900' : ''}`}
             >
               Servicios
             </button>
             <button
               onClick={() => scrollToSection('nosotros')}
-              className={`hover:text-yellow-400 transition ${activeSection === 'nosotros' ? 'text-yellow-400' : ''}`}
+              className={`hover:text-blue-900 transition ${activeSection === 'nosotros' ? 'text-blue-900' : ''}`}
             >
               Nosotros
             </button>
             <button
               onClick={() => scrollToSection('contacto')}
-              className={`hover:text-yellow-400 transition ${activeSection === 'contacto' ? 'text-yellow-400' : ''}`}
+              className={`hover:text-blue-900 transition ${activeSection === 'contacto' ? 'text-blue-900' : ''}`}
             >
               Contacto
             </button>
           </div>
 
           {/* Mobile Menu Button */}
-          <button className="md:hidden text-white focus:outline-none" onClick={toggleMenu}>
+          <button className="md:hidden text-black focus:outline-none" onClick={toggleMenu}>
             {mobileMenuOpen ? <FiX size={24} /> : <FiMenu size={24} />}
           </button>
         </div>
 
         {/* Mobile Navigation */}
         {mobileMenuOpen && (
-          <div className="md:hidden bg-gray-800 py-4 px-4">
+          <div className="md:hidden bg-gray-50 py-4 px-4">
             <div className="flex flex-col space-y-3">
               <button
                 onClick={() => scrollToSection('inicio')}
-                className={`hover:text-yellow-400 transition ${activeSection === 'inicio' ? 'text-yellow-400' : ''}`}
+                className={`hover:text-blue-900 transition ${activeSection === 'inicio' ? 'text-blue-900' : ''}`}
               >
                 Inicio
               </button>
               <button
                 onClick={() => scrollToSection('filosofia')}
-                className={`hover:text-yellow-400 transition ${activeSection === 'filosofia' ? 'text-yellow-400' : ''}`}
+                className={`hover:text-blue-900 transition ${activeSection === 'filosofia' ? 'text-blue-900' : ''}`}
               >
                 Filosofía
               </button>
               <button
                 onClick={() => scrollToSection('servicios')}
-                className={`hover:text-yellow-400 transition ${activeSection === 'servicios' ? 'text-yellow-400' : ''}`}
+                className={`hover:text-blue-900 transition ${activeSection === 'servicios' ? 'text-blue-900' : ''}`}
               >
                 Servicios
               </button>
               <button
                 onClick={() => scrollToSection('nosotros')}
-                className={`hover:text-yellow-400 transition ${activeSection === 'nosotros' ? 'text-yellow-400' : ''}`}
+                className={`hover:text-blue-900 transition ${activeSection === 'nosotros' ? 'text-blue-900' : ''}`}
               >
                 Nosotros
               </button>
               <button
                 onClick={() => scrollToSection('contacto')}
-                className={`hover:text-yellow-400 transition ${activeSection === 'contacto' ? 'text-yellow-400' : ''}`}
+                className={`hover:text-blue-900 transition ${activeSection === 'contacto' ? 'text-blue-900' : ''}`}
               >
                 Contacto
               </button>
@@ -270,7 +274,7 @@ function App() {
             </p>
             <button
               onClick={() => scrollToSection('servicios')}
-              className="bg-yellow-400 hover:bg-yellow-500 text-blue-900 font-bold py-3 px-8 rounded-lg transition duration-300"
+              className="bg-blue-900 hover:bg-blue-600 text-white-900 font-bold py-3 px-8 rounded-lg transition duration-300"
             >
               Leer Mas
             </button>
@@ -278,42 +282,42 @@ function App() {
         </section>
 
         {/* Filosofía Section */}
-        <section id="filosofia" className="py-16 bg-gray-50 mt-20">
+        <section id="filosofia" className="py-16 bg-blue-100 mt-20">
           <div className="container mx-auto px-4">
             <h2 className="text-3xl font-bold text-center mb-12 font-serif">Nuestra Filosofía</h2>
 
             {/* Valores de la Matriz */}
             <div className="grid md:grid-cols-5 gap-6 mb-16">
               <div className="bg-white p-6 rounded-lg shadow-md text-center">
-                <FaHandshake className="text-yellow-400 text-4xl mx-auto mb-4" />
+                <FaHandshake className="text-blue-900 text-4xl mx-auto mb-4" />
                 <h3 className="text-xl font-bold mb-3">Integridad</h3>
                 <p className="text-gray-600">
                   En la forma de actuar tanto en el campo profesional como personal de todo nuestro equipo.
                 </p>
               </div>
               <div className="bg-white p-6 rounded-lg shadow-md text-center">
-                <FaGavel className="text-yellow-400 text-4xl mx-auto mb-4" />
+                <FaGavel className="text-blue-900 text-4xl mx-auto mb-4" />
                 <h3 className="text-xl font-bold mb-3">Legalidad</h3>
                 <p className="text-gray-600">
                   Estudio, profundo conocimiento y respeto.
                 </p>
               </div>
               <div className="bg-white p-6 rounded-lg shadow-md text-center">
-                <FaBook className="text-yellow-400 text-4xl mx-auto mb-4" />
+                <FaBook className="text-blue-900 text-4xl mx-auto mb-4" />
                 <h3 className="text-xl font-bold mb-3">Compromiso</h3>
                 <p className="text-gray-600">
                   Nuestro máximo esfuerzo por un trabajo con excelencia.
                 </p>
               </div>
               <div className="bg-white p-6 rounded-lg shadow-md text-center">
-                <FaUserShield className="text-yellow-400 text-4xl mx-auto mb-4" />
+                <FaUserShield className="text-blue-900 text-4xl mx-auto mb-4" />
                 <h3 className="text-xl font-bold mb-3">Confiabilidad</h3>
                 <p className="text-gray-600">
                   Garantizamos resultados predecibles y servicios consistentes en los que puede confiar.
                 </p>
               </div>
               <div className="bg-white p-6 rounded-lg shadow-md text-center">
-                <FaBolt className="text-yellow-400 text-4xl mx-auto mb-4" />
+                <FaBolt className="text-blue-900 text-4xl mx-auto mb-4" />
                 <h3 className="text-xl font-bold mb-3">Eficiencia</h3>
                 <p className="text-gray-600">
                   Optimizamos recursos y procesos para entregar soluciones de calidad en tiempo oportuno.
@@ -326,7 +330,7 @@ function App() {
               {/* Mision */}
               <div className="bg-white p-8 rounded-lg shadow-md">
                 <div className="flex items-center mb-4">
-                  <FaBullseye className="text-yellow-400 text-3xl mr-4" />
+                  <FaBullseye className="text-blue-900 text-3xl mr-4" />
                   <h3 className="text-2xl font-bold">Misión</h3>
                 </div>
                 <p className="text-gray-600 pl-12">
@@ -340,7 +344,7 @@ function App() {
               {/* Vision */}
               <div className="bg-white p-8 rounded-lg shadow-md">
                 <div className="flex items-center mb-4">
-                  <FaEye className="text-yellow-400 text-3xl mr-4" />
+                  <FaEye className="text-blue-900 text-3xl mr-4" />
                   <h3 className="text-2xl font-bold">Visión</h3>
                 </div>
                 <p className="text-gray-600 pl-12">
@@ -396,7 +400,7 @@ function App() {
         </section>
 
         {/* Nosotros Section */}
-        <section id="nosotros" className="py-16 bg-gray-50">
+        <section id="nosotros" className="py-16 bg-blue-100">
           <div className="container mx-auto px-4">
             <h2 className="text-3xl font-bold text-center mb-12 font-serif">Nuestro Equipo</h2>
             <div className="bg-white rounded-lg shadow-md p-6 mb-12">
@@ -470,19 +474,19 @@ function App() {
                 <h3 className="text-xl font-bold mb-4">Información de Contacto</h3>
                 <div className="space-y-4">
                   <div className="flex items-start">
-                    <FaMapMarkerAlt className="text-yellow-400 mt-1 mr-3" />
+                    <FaMapMarkerAlt className="text-blue-900 mt-1 mr-3" />
                     <p>Condominios Toncontín, calle principal de Lomas de Toncontín hacia la Fuerza Aérea, contiguo a FECORAH<br />casa No. 29, Comayagüela, Francisco Morazán , Honduras</p>
                   </div>
                   <div className="flex items-center">
-                    <FaPhone className="text-yellow-400 mr-3" />
+                    <FaPhone className="text-blue-900 mr-3" />
                     <p>2234-3340 /42 <br />3175-3538 <br />3175-3542.</p>
                   </div>
                   <div className="flex items-center">
-                    <FaEnvelope className="text-yellow-400 mr-3" />
+                    <FaEnvelope className="text-blue-900 mr-3" />
                     <p>auditoria@delgadomaradiaga.com</p>
                   </div>
                   <div className="flex items-center">
-                    <FaClock className="text-yellow-400 mr-3" />
+                    <FaClock className="text-blue-900 mr-3" />
                     <p>Lunes a Viernes: 9:00 am - 6:00 pm<br />Sábados: 9:00 am - 1:00 pm</p>
                   </div>
                 </div>
@@ -495,7 +499,7 @@ function App() {
                     <input
                       type="text"
                       id="name"
-                      className={`w-full px-4 py-2 rounded text-gray-800 bg-amber-50 ${formErrors.name ? 'border-2 border-red-500' : 'border-amber-400'
+                      className={`w-full px-4 py-2 rounded text-gray-800 bg-blue-50 ${formErrors.name ? 'border-2 border-red-500' : 'border-amber-400'
                         }`}
                       placeholder="Su nombre"
                       value={formData.name}
@@ -513,7 +517,7 @@ function App() {
                     <input
                       type="email"
                       id="email"
-                      className={`w-full px-4 py-2 rounded text-gray-800 bg-amber-50 ${formErrors.email ? 'border-2 border-red-500' : 'border-amber-400'
+                      className={`w-full px-4 py-2 rounded text-gray-800 bg-blue-50 ${formErrors.email ? 'border-2 border-red-500' : 'border-amber-400'
                         }`}
                       placeholder="Su email"
                       value={formData.email}
@@ -531,7 +535,7 @@ function App() {
                     <input
                       type="tel"
                       id="phone"
-                      className={`w-full px-4 py-2 rounded text-gray-800 bg-amber-50 ${formErrors.phone ? 'border-2 border-red-500' : 'border-amber-400'
+                      className={`w-full px-4 py-2 rounded text-gray-800 bg-blue-50 ${formErrors.phone ? 'border-2 border-red-500' : 'border-amber-400'
                         }`}
                       placeholder="Su teléfono"
                       value={formData.phone}
@@ -548,7 +552,7 @@ function App() {
                     <textarea
                       id="message"
                       rows="4"
-                      className={`w-full px-4 py-2 rounded text-gray-800 bg-amber-50 ${formErrors.message ? 'border-2 border-red-500' : 'border-amber-400'
+                      className={`w-full px-4 py-2 rounded text-gray-800 bg-blue-50 ${formErrors.message ? 'border-2 border-red-500' : 'border-amber-400'
                         }`}
                       placeholder="Su mensaje"
                       value={formData.message}
@@ -576,7 +580,7 @@ function App() {
 
                   <button
                     type="submit"
-                    className={`bg-yellow-400 hover:bg-yellow-500 text-blue-900 font-bold py-3 px-6 rounded-lg transition duration-300 ${formStatus.submitting ? 'opacity-50 cursor-not-allowed' : ''
+                    className={`bg-blue-900 hover:bg-blue-600 text-white-900 font-bold py-3 px-6 rounded-lg transition duration-300 ${formStatus.submitting ? 'opacity-50 cursor-not-allowed' : ''
                       }`}
                     disabled={formStatus.submitting}
                   >
@@ -594,20 +598,20 @@ function App() {
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-4 gap-8">
             <div>
-              <h3 className="text-xl text-yellow-400 font-bold mb-4 font-serif">Nosotros</h3>
+              <h3 className="text-xl text-sky-400 font-bold mb-4 font-serif">Nosotros</h3>
               <p>Expertos en derecho comprometidos con la excelencia y la justicia para nuestros clientes.</p>
             </div>
             <div>
-              <h4 className="font-bold mb-4 text-yellow-400">Enlaces Rápidos</h4>
+              <h4 className="font-bold mb-4 text-sky-400">Enlaces Rápidos</h4>
               <ul className="space-y-2">
-                <li><button onClick={() => scrollToSection('inicio')} className="hover:text-yellow-400 transition">Inicio</button></li>
-                <li><button onClick={() => scrollToSection('servicios')} className="hover:text-yellow-400 transition">Servicios</button></li>
-                <li><button onClick={() => scrollToSection('nosotros')} className="hover:text-yellow-400 transition">Nosotros</button></li>
-                <li><button onClick={() => scrollToSection('contacto')} className="hover:text-yellow-400 transition">Contacto</button></li>
+                <li><button onClick={() => scrollToSection('inicio')} className="hover:text-blue-900 transition">Inicio</button></li>
+                <li><button onClick={() => scrollToSection('servicios')} className="hover:text-blue-900 transition">Servicios</button></li>
+                <li><button onClick={() => scrollToSection('nosotros')} className="hover:text-blue-900 transition">Nosotros</button></li>
+                <li><button onClick={() => scrollToSection('contacto')} className="hover:text-blue-900 transition">Contacto</button></li>
               </ul>
             </div>
             <div>
-              <h4 className="font-bold mb-4 text-yellow-400">Servicios</h4>
+              <h4 className="font-bold mb-4 text-sky-400">Servicios</h4>
               <ul className="space-y-2">
                 <li>Ingenieria en Sistemas</li>
                 <li>Auditoria Interna</li>
@@ -616,14 +620,14 @@ function App() {
               </ul>
             </div>
             <div>
-              <h4 className="font-bold mb-4 text-yellow-400">Contactenos</h4>
+              <h4 className="font-bold mb-4 text-sky-400">Contactenos</h4>
               <p>Condominios Toncontín, calle principal de Lomas de Toncontín hacia la Fuerza Aérea, contiguo a FECORAH<br />casa No. 29,</p>
               <p>Tegucigalpa, Honduras</p>
               <p>auditoria@delgadomaradiaga.com</p>
               <p>3175-3538</p>
             </div>
           </div>
-          <div className="border-t border-blue-700 mt-8 pt-6 text-center">
+          <div className="border-t border-blue-900 mt-8 pt-6 text-center">
             <p>&copy; {new Date().getFullYear()} Delgado Maradiaga Y Asociados. Todos los derechos reservados.</p>
             <p className='mt-3'><cite>Creado por itsbyte.com</cite></p>
           </div>
@@ -647,7 +651,7 @@ function TeamMember({ name, position, bio }) {
     <div className="bg-white p-6 rounded-lg shadow-md text-center">
       <div className="w-32 h-32 bg-gray-200 rounded-full mx-auto mb-4"></div>
       <h3 className="text-xl font-bold">{name}</h3>
-      <p className="text-yellow-500 mb-3">{position}</p>
+      <p className="text-blue-500 mb-3">{position}</p>
       <p className="text-gray-600">{bio}</p>
     </div>
   )
