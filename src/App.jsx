@@ -638,9 +638,6 @@ function ServiceCard({ title, description }) {
     <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300 h-full">
       <h3 className="text-xl font-bold mb-3">{title}</h3>
       <p className="text-gray-600">{description}</p>
-      <button className="mt-4 text-yellow-500 font-semibold hover:underline">
-        Más información
-      </button>
     </div>
   )
 }
