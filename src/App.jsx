@@ -189,31 +189,31 @@ function App() {
           <div className="hidden md:flex space-x-6">
             <button
               onClick={() => scrollToSection('inicio')}
-              className={`hover:text-blue-900 transition ${activeSection === 'inicio' ? 'text-blue-900' : ''}`}
+              className={`hover:text-blue-900 transition ${activeSection === 'inicio' ? 'font-bold text-blue-900' : ''}`}
             >
               Inicio
             </button>
             <button
               onClick={() => scrollToSection('filosofia')}
-              className={`hover:text-blue-900 transition ${activeSection === 'filosofia' ? 'text-blue-900' : ''}`}
+              className={`hover:text-blue-900 transition ${activeSection === 'filosofia' ? 'font-bold text-blue-900' : ''}`}
             >
               Filosofía
             </button>
             <button
               onClick={() => scrollToSection('servicios')}
-              className={`hover:text-blue-900 transition ${activeSection === 'servicios' ? 'text-blue-900' : ''}`}
+              className={`hover:text-blue-900 transition ${activeSection === 'servicios' ? 'font-bold text-blue-900' : ''}`}
             >
               Servicios
             </button>
             <button
               onClick={() => scrollToSection('nosotros')}
-              className={`hover:text-blue-900 transition ${activeSection === 'nosotros' ? 'text-blue-900' : ''}`}
+              className={`hover:text-blue-900 transition ${activeSection === 'nosotros' ? 'font-bold text-blue-900' : ''}`}
             >
               Nosotros
             </button>
             <button
               onClick={() => scrollToSection('contacto')}
-              className={`hover:text-blue-900 transition ${activeSection === 'contacto' ? 'text-blue-900' : ''}`}
+              className={`hover:text-blue-900 transition ${activeSection === 'contacto' ? 'font-bold text-blue-900' : ''}`}
             >
               Contacto
             </button>
@@ -274,7 +274,7 @@ function App() {
             </p>
             <button
               onClick={() => scrollToSection('servicios')}
-              className="bg-blue-900 hover:bg-blue-600 text-white-900 font-bold py-3 px-8 rounded-lg transition duration-300"
+              className="bg-gray-900 hover:bg-blue-600 text-white-900 font-bold py-3 px-8 rounded-lg transition duration-300"
             >
               Leer Mas
             </button>
@@ -282,9 +282,9 @@ function App() {
         </section>
 
         {/* Filosofía Section */}
-        <section id="filosofia" className="py-16 bg-blue-100 mt-20">
+        <section id="filosofia" className="py-16 bg-blue-900 mt-20">
           <div className="container mx-auto px-4">
-            <h2 className="text-3xl font-bold text-center mb-12 font-serif">Nuestra Filosofía</h2>
+            <h2 className="text-3xl font-bold text-center mb-12 font-serif text-white">Nuestra Filosofía</h2>
 
             {/* Valores de la Matriz */}
             <div className="grid md:grid-cols-5 gap-6 mb-16">
@@ -400,9 +400,9 @@ function App() {
         </section>
 
         {/* Nosotros Section */}
-        <section id="nosotros" className="py-16 bg-blue-100">
+        <section id="nosotros" className="py-16 bg-blue-900">
           <div className="container mx-auto px-4">
-            <h2 className="text-3xl font-bold text-center mb-12 font-serif">Nuestro Equipo</h2>
+            <h2 className="text-3xl font-bold text-center mb-12 font-serif text-white">Nuestro Equipo</h2>
             <div className="bg-white rounded-lg shadow-md p-6 mb-12">
               <p className="text-gray-700 mb-6">
                 DELGADO MARADIAGA Y ASOCIADOS S.DE R.L. tiene el agrado de presentar nuestro nuevo sitio Web,
@@ -598,11 +598,11 @@ function App() {
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-4 gap-8">
             <div>
-              <h3 className="text-xl text-sky-400 font-bold mb-4 font-serif">Nosotros</h3>
+              <h3 className="text-xl text-sky-900 font-bold mb-4 font-serif">Nosotros</h3>
               <p>Expertos en derecho comprometidos con la excelencia y la justicia para nuestros clientes.</p>
             </div>
             <div>
-              <h4 className="font-bold mb-4 text-sky-400">Enlaces Rápidos</h4>
+              <h4 className="font-bold mb-4 text-sky-900">Enlaces Rápidos</h4>
               <ul className="space-y-2">
                 <li><button onClick={() => scrollToSection('inicio')} className="hover:text-blue-900 transition">Inicio</button></li>
                 <li><button onClick={() => scrollToSection('servicios')} className="hover:text-blue-900 transition">Servicios</button></li>
@@ -611,7 +611,7 @@ function App() {
               </ul>
             </div>
             <div>
-              <h4 className="font-bold mb-4 text-sky-400">Servicios</h4>
+              <h4 className="font-bold mb-4 text-sky-900">Servicios</h4>
               <ul className="space-y-2">
                 <li>Ingenieria en Sistemas</li>
                 <li>Auditoria Interna</li>
@@ -620,7 +620,7 @@ function App() {
               </ul>
             </div>
             <div>
-              <h4 className="font-bold mb-4 text-sky-400">Contactenos</h4>
+              <h4 className="font-bold mb-4 text-sky-900">Contactenos</h4>
               <p>Condominios Toncontín, calle principal de Lomas de Toncontín hacia la Fuerza Aérea, contiguo a FECORAH<br />casa No. 29,</p>
               <p>Tegucigalpa, Honduras</p>
               <p>auditoria@delgadomaradiaga.com</p>
