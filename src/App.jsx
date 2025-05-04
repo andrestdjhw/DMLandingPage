@@ -627,7 +627,7 @@ function App() {
               <p>3175-3538</p>
             </div>
           </div>
-          <div className="border-t border-[002366] mt-8 pt-6 text-center">
+          <div className="border-t border-[#002366] mt-8 pt-6 text-center">
             <p>&copy; {new Date().getFullYear()} Delgado Maradiaga Y Asociados. Todos los derechos reservados.</p>
             <p className='mt-3'><cite>Creado por itsbyte.com</cite></p>
           </div>
