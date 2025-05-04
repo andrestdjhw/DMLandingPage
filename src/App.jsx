@@ -174,7 +174,7 @@ function App() {
   return (
     <div className="min-h-screen flex flex-col font-sans">
       {/* Navegacion */}
-      <nav className="bg-gray-50 text-black shadow-lg sticky top-0 z-50">
+      <nav className="bg-gray-50 text-black shadow-lg sticky top-0 z-50 h-24">
         <div className="container mx-auto px-4 py-3 flex justify-between items-center">
           <div className="flex items-center space-x-2">
             
@@ -189,31 +189,31 @@ function App() {
           <div className="hidden md:flex space-x-6">
             <button
               onClick={() => scrollToSection('inicio')}
-              className={`hover:text-blue-900 transition ${activeSection === 'inicio' ? 'font-bold text-blue-900' : ''}`}
+              className={`hover:text-[002366] transition ${activeSection === 'inicio' ? 'font-bold text-[002366]' : ''}`}
             >
               Inicio
             </button>
             <button
               onClick={() => scrollToSection('filosofia')}
-              className={`hover:text-blue-900 transition ${activeSection === 'filosofia' ? 'font-bold text-blue-900' : ''}`}
+              className={`hover:text-[002366] transition ${activeSection === 'filosofia' ? 'font-bold text-[002366]' : ''}`}
             >
               Filosofía
             </button>
             <button
               onClick={() => scrollToSection('servicios')}
-              className={`hover:text-blue-900 transition ${activeSection === 'servicios' ? 'font-bold text-blue-900' : ''}`}
+              className={`hover:text-[002366] transition ${activeSection === 'servicios' ? 'font-bold text-[002366]' : ''}`}
             >
               Servicios
             </button>
             <button
               onClick={() => scrollToSection('nosotros')}
-              className={`hover:text-blue-900 transition ${activeSection === 'nosotros' ? 'font-bold text-blue-900' : ''}`}
+              className={`hover:text-[002366] transition ${activeSection === 'nosotros' ? 'font-bold text-[002366]' : ''}`}
             >
               Nosotros
             </button>
             <button
               onClick={() => scrollToSection('contacto')}
-              className={`hover:text-blue-900 transition ${activeSection === 'contacto' ? 'font-bold text-blue-900' : ''}`}
+              className={`hover:text-[002366] transition ${activeSection === 'contacto' ? 'font-bold text-[002366]' : ''}`}
             >
               Contacto
             </button>
@@ -231,31 +231,31 @@ function App() {
             <div className="flex flex-col space-y-3">
               <button
                 onClick={() => scrollToSection('inicio')}
-                className={`hover:text-blue-900 transition ${activeSection === 'inicio' ? 'text-blue-900' : ''}`}
+                className={`hover:text-[002366] transition ${activeSection === 'inicio' ? 'text-[002366]' : ''}`}
               >
                 Inicio
               </button>
               <button
                 onClick={() => scrollToSection('filosofia')}
-                className={`hover:text-blue-900 transition ${activeSection === 'filosofia' ? 'text-blue-900' : ''}`}
+                className={`hover:text-[002366] transition ${activeSection === 'filosofia' ? 'text-[002366]' : ''}`}
               >
                 Filosofía
               </button>
               <button
                 onClick={() => scrollToSection('servicios')}
-                className={`hover:text-blue-900 transition ${activeSection === 'servicios' ? 'text-blue-900' : ''}`}
+                className={`hover:text-[002366] transition ${activeSection === 'servicios' ? 'text-[002366]' : ''}`}
               >
                 Servicios
               </button>
               <button
                 onClick={() => scrollToSection('nosotros')}
-                className={`hover:text-blue-900 transition ${activeSection === 'nosotros' ? 'text-blue-900' : ''}`}
+                className={`hover:text-[002366] transition ${activeSection === 'nosotros' ? 'text-[002366]' : ''}`}
               >
                 Nosotros
               </button>
               <button
                 onClick={() => scrollToSection('contacto')}
-                className={`hover:text-blue-900 transition ${activeSection === 'contacto' ? 'text-blue-900' : ''}`}
+                className={`hover:text-[002366] transition ${activeSection === 'contacto' ? 'text-[002366]' : ''}`}
               >
                 Contacto
               </button>
@@ -266,7 +266,7 @@ function App() {
 
       <main className="flex-grow">
         {/* Hero Section */}
-        <section id="inicio" className="relative bg-gradient-to-br from-blue-500 to-indigo-800 text-white py-20 md:py-32">
+        <section id="inicio" className="relative bg-gradient-to-br from-blue-500 to-[#002366] text-white py-20 md:py-32">
           <div className="container mx-auto px-4 text-center">
             <h1 className="text-4xl md:text-6xl font-bold mb-6 font-serif">Auditores y Consultores</h1>
             <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
@@ -282,42 +282,42 @@ function App() {
         </section>
 
         {/* Filosofía Section */}
-        <section id="filosofia" className="py-16 bg-blue-900 mt-20">
+        <section id="filosofia" className="py-16 bg-gradient-to-b from-[#002366] to-[#2596be] mt-20">
           <div className="container mx-auto px-4">
             <h2 className="text-3xl font-bold text-center mb-12 font-serif text-white">Nuestra Filosofía</h2>
 
             {/* Valores de la Matriz */}
             <div className="grid md:grid-cols-5 gap-6 mb-16">
               <div className="bg-white p-6 rounded-lg shadow-md text-center">
-                <FaHandshake className="text-blue-900 text-4xl mx-auto mb-4" />
+                <FaHandshake className="text-[002366] text-4xl mx-auto mb-4" />
                 <h3 className="text-xl font-bold mb-3">Integridad</h3>
                 <p className="text-gray-600">
                   En la forma de actuar tanto en el campo profesional como personal de todo nuestro equipo.
                 </p>
               </div>
               <div className="bg-white p-6 rounded-lg shadow-md text-center">
-                <FaGavel className="text-blue-900 text-4xl mx-auto mb-4" />
+                <FaGavel className="text-[002366] text-4xl mx-auto mb-4" />
                 <h3 className="text-xl font-bold mb-3">Legalidad</h3>
                 <p className="text-gray-600">
                   Estudio, profundo conocimiento y respeto.
                 </p>
               </div>
               <div className="bg-white p-6 rounded-lg shadow-md text-center">
-                <FaBook className="text-blue-900 text-4xl mx-auto mb-4" />
+                <FaBook className="text-[002366] text-4xl mx-auto mb-4" />
                 <h3 className="text-xl font-bold mb-3">Compromiso</h3>
                 <p className="text-gray-600">
                   Nuestro máximo esfuerzo por un trabajo con excelencia.
                 </p>
               </div>
               <div className="bg-white p-6 rounded-lg shadow-md text-center">
-                <FaUserShield className="text-blue-900 text-4xl mx-auto mb-4" />
+                <FaUserShield className="text-[002366] text-4xl mx-auto mb-4" />
                 <h3 className="text-xl font-bold mb-3">Confiabilidad</h3>
                 <p className="text-gray-600">
                   Garantizamos resultados predecibles y servicios consistentes en los que puede confiar.
                 </p>
               </div>
               <div className="bg-white p-6 rounded-lg shadow-md text-center">
-                <FaBolt className="text-blue-900 text-4xl mx-auto mb-4" />
+                <FaBolt className="text-[002366] text-4xl mx-auto mb-4" />
                 <h3 className="text-xl font-bold mb-3">Eficiencia</h3>
                 <p className="text-gray-600">
                   Optimizamos recursos y procesos para entregar soluciones de calidad en tiempo oportuno.
@@ -330,7 +330,7 @@ function App() {
               {/* Mision */}
               <div className="bg-white p-8 rounded-lg shadow-md">
                 <div className="flex items-center mb-4">
-                  <FaBullseye className="text-blue-900 text-3xl mr-4" />
+                  <FaBullseye className="text-[002366] text-3xl mr-4" />
                   <h3 className="text-2xl font-bold">Misión</h3>
                 </div>
                 <p className="text-gray-600 pl-12">
@@ -344,7 +344,7 @@ function App() {
               {/* Vision */}
               <div className="bg-white p-8 rounded-lg shadow-md">
                 <div className="flex items-center mb-4">
-                  <FaEye className="text-blue-900 text-3xl mr-4" />
+                  <FaEye className="text-[002366] text-3xl mr-4" />
                   <h3 className="text-2xl font-bold">Visión</h3>
                 </div>
                 <p className="text-gray-600 pl-12">
@@ -400,7 +400,7 @@ function App() {
         </section>
 
         {/* Nosotros Section */}
-        <section id="nosotros" className="py-16 bg-blue-900">
+        <section id="nosotros" className="py-16 bg-gradient-to-b from-[#002366] to-[#2596be]">
           <div className="container mx-auto px-4">
             <h2 className="text-3xl font-bold text-center mb-12 font-serif text-white">Nuestro Equipo</h2>
             <div className="bg-white rounded-lg shadow-md p-6 mb-12">
@@ -474,19 +474,19 @@ function App() {
                 <h3 className="text-xl font-bold mb-4">Información de Contacto</h3>
                 <div className="space-y-4">
                   <div className="flex items-start">
-                    <FaMapMarkerAlt className="text-blue-900 mt-1 mr-3" />
+                    <FaMapMarkerAlt className="text-[002366] mt-1 mr-3" />
                     <p>Condominios Toncontín, calle principal de Lomas de Toncontín hacia la Fuerza Aérea, contiguo a FECORAH<br />casa No. 29, Comayagüela, Francisco Morazán , Honduras</p>
                   </div>
                   <div className="flex items-center">
-                    <FaPhone className="text-blue-900 mr-3" />
+                    <FaPhone className="text-[002366] mr-3" />
                     <p>2234-3340 /42 <br />3175-3538 <br />3175-3542.</p>
                   </div>
                   <div className="flex items-center">
-                    <FaEnvelope className="text-blue-900 mr-3" />
+                    <FaEnvelope className="text-[002366] mr-3" />
                     <p>auditoria@delgadomaradiaga.com</p>
                   </div>
                   <div className="flex items-center">
-                    <FaClock className="text-blue-900 mr-3" />
+                    <FaClock className="text-[002366] mr-3" />
                     <p>Lunes a Viernes: 9:00 am - 6:00 pm<br />Sábados: 9:00 am - 1:00 pm</p>
                   </div>
                 </div>
@@ -580,7 +580,7 @@ function App() {
 
                   <button
                     type="submit"
-                    className={`bg-blue-900 hover:bg-blue-600 text-white-900 font-bold py-3 px-6 rounded-lg transition duration-300 ${formStatus.submitting ? 'opacity-50 cursor-not-allowed' : ''
+                    className={`bg-[#002366] hover:bg-blue-600 text-white-900 font-bold py-3 px-6 rounded-lg transition duration-300 ${formStatus.submitting ? 'opacity-50 cursor-not-allowed' : ''
                       }`}
                     disabled={formStatus.submitting}
                   >
@@ -604,10 +604,10 @@ function App() {
             <div>
               <h4 className="font-bold mb-4 text-sky-900">Enlaces Rápidos</h4>
               <ul className="space-y-2">
-                <li><button onClick={() => scrollToSection('inicio')} className="hover:text-blue-900 transition">Inicio</button></li>
-                <li><button onClick={() => scrollToSection('servicios')} className="hover:text-blue-900 transition">Servicios</button></li>
-                <li><button onClick={() => scrollToSection('nosotros')} className="hover:text-blue-900 transition">Nosotros</button></li>
-                <li><button onClick={() => scrollToSection('contacto')} className="hover:text-blue-900 transition">Contacto</button></li>
+                <li><button onClick={() => scrollToSection('inicio')} className="hover:text-[002366] transition">Inicio</button></li>
+                <li><button onClick={() => scrollToSection('servicios')} className="hover:text-[002366] transition">Servicios</button></li>
+                <li><button onClick={() => scrollToSection('nosotros')} className="hover:text-[002366] transition">Nosotros</button></li>
+                <li><button onClick={() => scrollToSection('contacto')} className="hover:text-[002366] transition">Contacto</button></li>
               </ul>
             </div>
             <div>
@@ -627,7 +627,7 @@ function App() {
               <p>3175-3538</p>
             </div>
           </div>
-          <div className="border-t border-blue-900 mt-8 pt-6 text-center">
+          <div className="border-t border-[002366] mt-8 pt-6 text-center">
             <p>&copy; {new Date().getFullYear()} Delgado Maradiaga Y Asociados. Todos los derechos reservados.</p>
             <p className='mt-3'><cite>Creado por itsbyte.com</cite></p>
           </div>
@@ -639,7 +639,7 @@ function App() {
 
 function ServiceCard({ title, description }) {
   return (
-    <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300 h-full">
+    <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg shadow-cyan-500/50 ring-[#2596be] transition duration-300 h-full">
       <h3 className="text-xl font-bold mb-3">{title}</h3>
       <p className="text-gray-600">{description}</p>
     </div>
