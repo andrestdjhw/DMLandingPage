@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { FaBalanceScale, FaGavel, FaHandshake, FaBook, FaPhone, FaMapMarkerAlt, FaEnvelope, FaClock, FaUserShield, FaBolt, FaBullseye, FaEye } from 'react-icons/fa'
 import { FiMenu, FiX } from 'react-icons/fi'
 import emailjs from '@emailjs/browser'
-import DMLogoImage from './assets/DMLogo.png 
+import DMLogoImage from './assets/DMLogo.png'
 
 function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
