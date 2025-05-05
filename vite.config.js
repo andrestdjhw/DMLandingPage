@@ -4,10 +4,17 @@ import tailwindcss from '@tailwindcss/vite'
 
 // https://vite.dev/config/
 export default defineConfig({
-  // Base URL for GitHub Pages deployment
   base: process.env.DEPLOY_BASE_URL || '/',
   plugins: [
     react(),
     tailwindcss(),
   ],
+  build: {
+    assetsDir: 'assets',
+    rollupOptions: {
+      output: {
+        assetFileNames: 'assets/[name]-[hash][extname]',
+      },
+    },
+  },
 })
