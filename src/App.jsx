@@ -41,13 +41,19 @@ function App() {
   }
 
   const scrollToSection = (sectionId) => {
-    const element = document.getElementById(sectionId)
+    const element = document.getElementById(sectionId);
+    const navbarHeight = document.querySelector('nav').offsetHeight;
+    
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' })
-      setActiveSection(sectionId)
-      setMobileMenuOpen(false)
+      const elementPosition = element.offsetTop - navbarHeight;
+      window.scrollTo({
+        top: elementPosition,
+        behavior: 'smooth'
+      });
+      setActiveSection(sectionId);
+      setMobileMenuOpen(false);
     }
-  }
+  };
 
   // Funcion para validacion del formulario
   const validateForm = (data) => {
@@ -269,7 +275,7 @@ function App() {
 
       <main className="flex-grow">
         {/* Hero Section */}
-        <section id="inicio" className="relative bg-gradient-to-br from-[#546c94] to-[#3c5472] text-white py-20 md:py-32">
+        <section id="inicio" className="relative bg-gradient-to-br from-[#546c94] to-[#3c5472] text-white py-20 md:py-32 pt-24">
           <div className="container mx-auto px-4 text-center">
             <h1 className="text-4xl md:text-6xl font-bold mb-6 font-serif">Auditores y Consultores</h1>
             <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
@@ -285,7 +291,7 @@ function App() {
         </section>
 
         {/* Filosofía Section */}
-        <section id="filosofia" className="py-16 bg-gradient-to-r from-[#546c94] to-[#3c5472] mt-20">
+        <section id="filosofia" className="py-16 bg-gradient-to-r from-[#546c94] to-[#3c5472] mt-20 pt-24">
           <div className="container mx-auto px-4">
             <h2 className="text-3xl font-bold text-center mb-12 font-serif text-white">Nuestra Filosofía</h2>
 
@@ -360,7 +366,7 @@ function App() {
         </section>
 
         {/* Servicios Section */}
-        <section id="servicios" className="py-16">
+        <section id="servicios" className="py-16 pt-24">
           <div className="container mx-auto px-4">
             <h2 className="text-3xl font-bold text-center mb-12 font-serif">Nuestros Servicios</h2>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -403,7 +409,7 @@ function App() {
         </section>
 
         {/* Nosotros Section */}
-        <section id="nosotros" className="py-16 bg-gradient-to-r from-[#546c94] to-[#3c5472]">
+        <section id="nosotros" className="py-16 bg-gradient-to-r from-[#546c94] to-[#3c5472] pt-24">
           <div className="container mx-auto px-4">
             <h2 className="text-3xl font-bold text-center mb-12 font-serif text-white">Nuestro Equipo</h2>
             <div className="bg-white rounded-lg shadow-md p-6 mb-12">
@@ -469,7 +475,7 @@ function App() {
         </section>
 
         {/* Contacto Section - Incluye implementacions EmailJS */}
-        <section id="contacto" className="py-16 bg-gray-900 text-white">
+        <section id="contacto" className="py-16 bg-gray-900 text-white pt-24">
           <div className="container mx-auto px-4">
             <h2 className="text-3xl font-bold text-center mb-12 font-serif">Contáctenos</h2>
             <div className="grid md:grid-cols-2 gap-8">
