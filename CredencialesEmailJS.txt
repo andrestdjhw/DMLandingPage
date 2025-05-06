@@ -1,0 +1,13 @@
+Correo:
+contacto.delgadomaradiaga@gmail.com
+Contraseña:
+Delg@d0M2025
+
+Public Key:
+F_nbCg0rutBQqBcjD
+
+Service ID:
+service_bb1ywxq
+
+Template ID:
+template_hqmvdvy

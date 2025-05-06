@@ -131,7 +131,7 @@ function App() {
 
   // Inicializa EmailJS cuando el componente es montado
   useEffect(() => {
-    emailjs.init("NPFppts74nYqJf4Ci")
+    emailjs.init("F_nbCg0rutBQqBcjD")/*Esto de aca es la public Key, Se encuentra en /CredencialesEmailJS.txt*/
   }, [])
 
   const toggleMenu = () => {
@@ -237,8 +237,8 @@ function App() {
     })
 
     // EmailJS Configuracion
-    const serviceId = 'service_ozy7fik'
-    const templateId = 'template_f2fqs41'
+    const serviceId = 'service_bb1ywxq'
+    const templateId = 'template_hqmvdvy'
 
     // Prepare template parameters
     const templateParams = {
