@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { FaBalanceScale, FaGavel, FaHandshake, FaBook, FaPhone, FaMapMarkerAlt, FaEnvelope, FaClock, FaUserShield, FaBolt, FaBullseye, FaEye } from 'react-icons/fa'
+import { FaGavel, FaHandshake, FaBook, FaPhone, FaMapMarkerAlt, FaEnvelope, FaClock, FaUserShield, FaBolt, FaBullseye, FaEye } from 'react-icons/fa'
 import { FiMenu, FiX } from 'react-icons/fi'
 import emailjs from '@emailjs/browser'
 import DMLogoImage from './assets/DMLogo.png'
@@ -7,7 +7,106 @@ import DMLogoImage from './assets/DMLogo.png'
 function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('inicio')
-  const [showMore, setShowMore] = useState(false);
+  const [showMore, setShowMore] = useState(false)
+
+  // Accordion Item Component
+  const AccordionItem = ({ title, items, isOpen, toggleAccordion }) => {
+    return (
+      <div className="border-b border-[#546c94] shadow-lg">
+        <button
+          className="w-full py-4 px-6 text-left bg-white hover:bg-gray-50 focus:outline-none flex justify-between items-center"
+          onClick={toggleAccordion}
+        >
+          <span className="text-lg font-medium text-gray-800">{title}</span>
+          <svg
+            className={`w-6 h-6 transition-transform duration-300 ${isOpen ? 'transform rotate-180' : ''}`}
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </button>
+        {isOpen && (
+          <div className="py-4 px-6 bg-[#3c5472]">
+            <ul className="list-disc pl-5 space-y-2">
+              {items.map((item, index) => (
+                <li key={index} className="text-white">{item}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
+    )
+  }
+
+  // ServiceCard Component
+  const ServiceCard = ({ title, description }) => {
+    return (
+      <div className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg shadow-[#145870]/50 ring-blue-600 transition-shadow duration-300">
+        <h3 className="text-xl font-semibold mb-3 text-gray-800">{title}</h3>
+        <p className="text-gray-600">{description}</p>
+      </div>
+    )
+  }
+
+  // TeamMember Component
+  const TeamMember = ({ name, position, bio }) => {
+    return (
+      <div className="bg-white p-6 rounded-lg shadow-md text-center">
+        <div className="w-32 h-32 bg-gray-200 rounded-full mx-auto mb-4"></div>
+        <h3 className="text-xl font-bold">{name}</h3>
+        <p className="text-blue-500 mb-3">{position}</p>
+        <p className="text-gray-600">{bio}</p>
+      </div>
+    )
+  }
+
+  const [openAccordion, setOpenAccordion] = useState(null)
+
+  const toggleAccordion = (index) => {
+    setOpenAccordion(openAccordion === index ? null : index)
+  }
+
+  // Accordion data
+  const accordionData = [
+    {
+      title: "Implementaciones Tecnológicas",
+      items: [
+        "Auditoría al entorno tecnológico basado en COBIT.",
+        "Auditoría de Seguridad de la Información.",
+        "Instalación y mantenimiento de Software Administrativo-Financiero-Contable.",
+        "Instalación y mantenimiento de Software de Prevención de Lavado de Activos y Financiamiento del Terrorismo (PLA/FT).",
+      ],
+    },
+    {
+      title: "Auditorias y consultorías que desarollamos",
+      items: [
+        "Auditorías Financieras con opinión de auditores independientes.",
+        "Servicios de Auditoría Interna para las empresas.",
+        "Auditorías Especiales.",
+        "Auditoría Forense.",
+        "Organización Administrativa y Financiera.",
+        "Servicios de Contabilidad.",
+        "Precios de Transferencia.",
+        "Auditoría Fiscal.",
+      ],
+    },
+    {
+      title: "Seminarios",
+      items: [
+        "Normas Internacionales de Contabilidad.",
+        "Normas de Información Financiera.",
+        "Manejo de Inventarios.",
+        "Lavado de Activos y Financiamiento al Terrorismo.",
+        "Precios de Transferencia.",
+        "Auditorías a Fideicomisos.",
+        "Seguridad de la Información.",
+        "Riesgo Operativo.",
+      ],
+    },
+  ]
 
   // Estado del formulario
   const [formData, setFormData] = useState({
@@ -32,116 +131,114 @@ function App() {
 
   // Inicializa EmailJS cuando el componente es montado
   useEffect(() => {
-    // Reemplazar 'YOUR_PUBLIC_KEY' con tu actual EmailJS public key
-    emailjs.init("NPFppts74nYqJf4Ci");
-  }, []);
+    emailjs.init("NPFppts74nYqJf4Ci")
+  }, [])
 
   const toggleMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen)
   }
 
   const scrollToSection = (sectionId) => {
-    const element = document.getElementById(sectionId);
-    const navbarHeight = document.querySelector('nav').offsetHeight;
-    
+    const element = document.getElementById(sectionId)
+    const navbarHeight = document.querySelector('nav').offsetHeight
+
     if (element) {
-      const elementPosition = element.offsetTop - navbarHeight;
+      const elementPosition = element.offsetTop - navbarHeight
       window.scrollTo({
         top: elementPosition,
         behavior: 'smooth'
-      });
-      setActiveSection(sectionId);
-      setMobileMenuOpen(false);
+      })
+      setActiveSection(sectionId)
+      setMobileMenuOpen(false)
     }
-  };
+  }
 
   // Funcion para validacion del formulario
   const validateForm = (data) => {
-    const errors = {};
+    const errors = {}
 
     // Validacion del nombre
     if (!data.name.trim()) {
-      errors.name = 'El nombre es requerido';
+      errors.name = 'El nombre es requerido'
     }
 
     // Validacion del correo
     if (!data.email.trim()) {
-      errors.email = 'El correo electrónico es requerido';
+      errors.email = 'El correo electrónico es requerido'
     } else {
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
       if (!emailRegex.test(data.email.trim())) {
-        errors.email = 'Por favor ingrese un correo electrónico válido';
+        errors.email = 'Por favor ingrese un correo electrónico válido'
       }
     }
 
     // Validacion del mensaje
     if (!data.message.trim()) {
-      errors.message = 'El mensaje es requerido';
+      errors.message = 'El mensaje es requerido'
     }
 
-    return errors;
-  };
+    return errors
+  }
 
   const handleInputChange = (e) => {
-    const { id, value } = e.target;
+    const { id, value } = e.target
     setFormData(prevData => ({
       ...prevData,
       [id]: value
-    }));
+    }))
 
     // Limpia los errores cuando el usuario comienza a teclear
     if (formErrors[id]) {
       setFormErrors(prev => ({
         ...prev,
         [id]: null
-      }));
+      }))
     }
-  };
+  }
 
   const handleBlur = (e) => {
-    const { id, value } = e.target;
+    const { id, value } = e.target
 
     // Validar este campo solo en borroso
     const fieldErrors = validateForm({
       ...formData,
       [id]: value
-    });
+    })
 
     if (fieldErrors[id]) {
       setFormErrors(prev => ({
         ...prev,
         [id]: fieldErrors[id]
-      }));
+      }))
     }
-  };
+  }
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
     // Validar todos los campos del formulario
-    const errors = validateForm(formData);
+    const errors = validateForm(formData)
 
     // Si hay errores, los muestra y cancela el envio
     if (Object.keys(errors).length > 0) {
-      setFormErrors(errors);
+      setFormErrors(errors)
       setFormStatus({
         submitting: false,
         success: null,
         error: 'Por favor corrija los errores en el formulario.'
-      });
-      return;
+      })
+      return
     }
 
     setFormStatus({
       submitting: true,
       success: null,
       error: null
-    });
+    })
 
     // EmailJS Configuracion
-    // Reemplace estos valores por su actual EmailJS service ID and template ID
-    const serviceId = 'service_ozy7fik';
-    const templateId = 'template_f2fqs41';
+    const serviceId = 'service_ozy7fik'
+    const templateId = 'template_f2fqs41'
 
     // Prepare template parameters
     const templateParams = {
@@ -149,17 +246,17 @@ function App() {
       reply_to: formData.email,
       phone: formData.phone || 'No proporcionado',
       message: formData.message
-    };
+    }
 
     try {
       // Enviar correo utilizando EmailJS
-      await emailjs.send(serviceId, templateId, templateParams);
+      await emailjs.send(serviceId, templateId, templateParams)
 
       setFormStatus({
         submitting: false,
         success: 'Mensaje enviado correctamente. Nos pondremos en contacto pronto.',
         error: null
-      });
+      })
 
       // Resetear formulario
       setFormData({
@@ -167,16 +264,16 @@ function App() {
         email: '',
         phone: '',
         message: ''
-      });
+      })
     } catch (error) {
-      console.error('Error al enviar el formulario:', error);
+      console.error('Error al enviar el formulario:', error)
       setFormStatus({
         submitting: false,
         success: null,
         error: 'Error al enviar el mensaje. Por favor intente nuevamente.'
-      });
+      })
     }
-  };
+  }
 
   return (
     <div className="min-h-screen flex flex-col font-sans">
@@ -184,7 +281,6 @@ function App() {
       <nav className="bg-gray-50 text-black shadow-lg sticky top-0 z-50 h-24">
         <div className="container mx-auto px-4 py-3 flex justify-between items-center">
           <div className="flex items-center space-x-2">
-
             <img
               src={DMLogoImage}
               alt="Delgado Maradiaga y Asociados"
@@ -351,14 +447,14 @@ function App() {
                 <FaUserShield className="text-[002366] text-4xl mx-auto mb-4" />
                 <h3 className="text-xl font-bold mb-3">Confiabilidad</h3>
                 <p className="text-gray-600">
-                  Garantizamos resultados predecibles y servicios consistentes en los que puede confiar.
+                  Con la información que nos proporcionan los clientes y con el producto que nuestra firma produce.
                 </p>
               </div>
               <div className="bg-white p-6 rounded-lg shadow-md text-center">
                 <FaBolt className="text-[002366] text-4xl mx-auto mb-4" />
                 <h3 className="text-xl font-bold mb-3">Eficiencia</h3>
                 <p className="text-gray-600">
-                  Optimizamos recursos y procesos para entregar soluciones de calidad en tiempo oportuno.
+                  En tiempo y resultados.
                 </p>
               </div>
             </div>
@@ -369,10 +465,12 @@ function App() {
         <section id="servicios" className="py-16 pt-24">
           <div className="container mx-auto px-4">
             <h2 className="text-3xl font-bold text-center mb-12 font-serif">Nuestros Servicios</h2>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+            {/* Service Cards */}
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
               <ServiceCard
                 title="Auditoria de estados financieros"
-                description="Ofrecemos la revisión y adecuación de los procedimientos establecidos, análisis e investigación de los movimientos y saldos de las cuentas de los estados financieros, establecimiento de métodos y procedimientos de control sean estos técnicos o administrativos, la certificación de los estados financieros y nuestra opinión como auditores independientes"
+                description="Ofrecemos la certificación de los estados financieros y nuestra opinión como auditores independientes, basados en el cumplimiento de las Normas Internacionales de Información Financiera (NIIF), Cumplimiento de los preceptos legales de los entes Supervisores como la CNBS y CONSUCOOP; Políticas internas y la revisión y adecuación de los procedimientos establecidos, análisis e investigación de los movimientos y saldos de las cuentas de los estados financieros, establecimiento de métodos y procedimientos de control sean éstos técnicos o administrativos."
               />
               <ServiceCard
                 title="Servicios de auditoría Interna"
@@ -384,26 +482,21 @@ function App() {
               />
               <ServiceCard
                 title="Servicios de Asociados"
-                description="Como complemento a nuestros servicios profesionales, contamos con personal asociado a nuestra firma en las especialidades de Sistemas de Información, Ingeniería Civil, Industria,  Asesoría Legal y otras."
+                description="Como complemento a nuestros servicios profesionales, contamos con personal asociado a nuestra firma en las especialidades de Sistemas de Información, Ingeniería Civil, Industria, Asesoría Legal y otras."
               />
-              <ServiceCard
-                title="Implementaciones Tecnológicas"
-                description="Auditoría al entorno tecnológico basado en COBIT.
-                            Auditoría de Seguridad de la Información.
-                            Instalación y mantenimiento de Software Administrativo-Financiero-Contable.
-                            Instalación y mantenimiento de Software de Prevención de Lavado de Activos y Financiamiento del Terrorismo (PLA/FT) ."
-              />
-              <ServiceCard
-                title="Auditorias y consultorías"
-                description="Auditorías Financieras con opinión de auditores independientes.
-                             Servicios de Auditoría Interna para las empresas
-                             Auditorías Especiales.
-                             Auditoría Forense
-                             Organización Administrativa y Financiera.
-                             Servicios de Contabilidad
-                             Precios de Transferencia
-                             Auditoría Fiscal "
-              />
+            </div>
+
+            {/* Accordion Section */}
+            <div className="mt-8 border rounded-lg overflow-hidden shadow-md">
+              {accordionData.map((item, index) => (
+                <AccordionItem
+                  key={index}
+                  title={item.title}
+                  items={item.items}
+                  isOpen={openAccordion === index}
+                  toggleAccordion={() => toggleAccordion(index)}
+                />
+              ))}
             </div>
           </div>
         </section>
@@ -456,18 +549,18 @@ function App() {
             </div>
             <div className="grid md:grid-cols-3 gap-8">
               <TeamMember
-                name="Licenciado Ramon Maradiaga"
+                name="Lic. Ramon Maradiaga"
                 position="Socio Fundador"
                 bio="Especialista en derecho corporativo con más de 30 años de experiencia."
               />
               <TeamMember
-                name="Licenciado Jorge Delgado"
+                name="Lic. Jorge Delgado"
                 position="Socio Fundador"
                 bio="Experta en derecho familiar y sucesiones, con enfoque humanizado."
               />
               <TeamMember
-                name="Lic. Carlos Villanueva"
-                position="Socio"
+                name="Lic. Leslie Palma"
+                position="Gerente de Operaciones"
                 bio="Especialista en litigio civil y arbitraje, estrategia legal innovadora."
               />
             </div>
@@ -508,8 +601,7 @@ function App() {
                     <input
                       type="text"
                       id="name"
-                      className={`w-full px-4 py-2 rounded text-gray-800 bg-blue-50 ${formErrors.name ? 'border-2 border-red-500' : 'border-amber-400'
-                        }`}
+                      className={`w-full px-4 py-2 rounded text-gray-800 bg-blue-50 ${formErrors.name ? 'border-2 border-red-500' : 'border-amber-400'}`}
                       placeholder="Su nombre"
                       value={formData.name}
                       onChange={handleInputChange}
@@ -526,8 +618,7 @@ function App() {
                     <input
                       type="email"
                       id="email"
-                      className={`w-full px-4 py-2 rounded text-gray-800 bg-blue-50 ${formErrors.email ? 'border-2 border-red-500' : 'border-amber-400'
-                        }`}
+                      className={`w-full px-4 py-2 rounded text-gray-800 bg-blue-50 ${formErrors.email ? 'border-2 border-red-500' : 'border-amber-400'}`}
                       placeholder="Su email"
                       value={formData.email}
                       onChange={handleInputChange}
@@ -544,8 +635,7 @@ function App() {
                     <input
                       type="tel"
                       id="phone"
-                      className={`w-full px-4 py-2 rounded text-gray-800 bg-blue-50 ${formErrors.phone ? 'border-2 border-red-500' : 'border-amber-400'
-                        }`}
+                      className={`w-full px-4 py-2 rounded text-gray-800 bg-blue-50 ${formErrors.phone ? 'border-2 border-red-500' : 'border-amber-400'}`}
                       placeholder="Su teléfono"
                       value={formData.phone}
                       onChange={handleInputChange}
@@ -561,8 +651,7 @@ function App() {
                     <textarea
                       id="message"
                       rows="4"
-                      className={`w-full px-4 py-2 rounded text-gray-800 bg-blue-50 ${formErrors.message ? 'border-2 border-red-500' : 'border-amber-400'
-                        }`}
+                      className={`w-full px-4 py-2 rounded text-gray-800 bg-blue-50 ${formErrors.message ? 'border-2 border-red-500' : 'border-amber-400'}`}
                       placeholder="Su mensaje"
                       value={formData.message}
                       onChange={handleInputChange}
@@ -589,8 +678,7 @@ function App() {
 
                   <button
                     type="submit"
-                    className={`bg-[#0f4cbc] hover:bg-blue-600 text-white-900 font-bold py-3 px-6 rounded-lg transition duration-300 ${formStatus.submitting ? 'opacity-50 cursor-not-allowed' : ''
-                      }`}
+                    className={`bg-[#0f4cbc] hover:bg-blue-600 text-white-900 font-bold py-3 px-6 rounded-lg transition duration-300 ${formStatus.submitting ? 'opacity-50 cursor-not-allowed' : ''}`}
                     disabled={formStatus.submitting}
                   >
                     {formStatus.submitting ? 'Enviando...' : 'Enviar Mensaje'}
@@ -642,26 +730,6 @@ function App() {
           </div>
         </div>
       </footer>
-    </div>
-  )
-}
-
-function ServiceCard({ title, description }) {
-  return (
-    <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg shadow-blue-600/50 ring-blue-600 transition duration-300 h-full">
-      <h3 className="text-xl font-bold mb-3">{title}</h3>
-      <p className="text-gray-600">{description}</p>
-    </div>
-  )
-}
-
-function TeamMember({ name, position, bio }) {
-  return (
-    <div className="bg-white p-6 rounded-lg shadow-md text-center">
-      <div className="w-32 h-32 bg-gray-200 rounded-full mx-auto mb-4"></div>
-      <h3 className="text-xl font-bold">{name}</h3>
-      <p className="text-blue-500 mb-3">{position}</p>
-      <p className="text-gray-600">{bio}</p>
     </div>
   )
 }
