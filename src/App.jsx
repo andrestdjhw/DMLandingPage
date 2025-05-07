@@ -547,7 +547,7 @@ function App() {
                 {showMore ? "Ver menos" : "Ver más"}
               </button>
             </div>
-            <div className="grid md:grid-cols-3 gap-8">
+            {/* <div className="grid md:grid-cols-3 gap-8">
               <TeamMember
                 name="Lic. Ramon Maradiaga"
                 position="Socio Fundador"
@@ -563,7 +563,7 @@ function App() {
                 position="Gerente de Operaciones"
                 bio="Especialista en litigio civil y arbitraje, estrategia legal innovadora."
               />
-            </div>
+            </div> */}
           </div>
         </section>
 
