@@ -507,7 +507,7 @@ function App() {
             <h2 className="text-3xl font-bold text-center mb-12 font-serif text-white">Nuestro Equipo</h2>
             <div className="bg-white rounded-lg shadow-md p-6 mb-12">
               <p className="text-gray-700 mb-6">
-                DELGADO MARADIAGA Y ASOCIADOS S.DE R.L. tiene el agrado de presentar nuestro nuevo sitio Web,
+                <strong>DELGADO MARADIAGA Y ASOCIADOS S.DE R.L. </strong> tiene el agrado de presentar nuestro nuevo sitio Web,
                 con el pretendemos aprovechar las ventajas de las nuevas tecnologías a favor de nuestros clientes,
                 convirtiéndose para nosotros en un gran logro cualitativo en la gestión empresarial en todos los niveles.
               </p>
