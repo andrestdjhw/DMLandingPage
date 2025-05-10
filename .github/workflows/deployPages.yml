@@ -41,7 +41,7 @@ jobs:
       
       - name: Compilar Proyecto
         env:
-          DEPLOY_BASE_URL: /${{ env.REPO_NAME }}/
+          DEPLOY_BASE_URL: '/'
         run: |
           echo "Usando base URL: $DEPLOY_BASE_URL"
           npm run build
