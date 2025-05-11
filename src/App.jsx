@@ -375,11 +375,11 @@ function App() {
           <div className="container mx-auto px-4 text-center">
             <h1 className="text-4xl md:text-6xl font-bold mb-6 font-serif">Auditores y Consultores</h1>
             <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
-              <cite>Somos una empresa con la finalidad principal de realizar auditorias administrativas y financieras. Estudios de factibilidad de proyectos, adecuación de sistemas contables a sistemas computarizados, instalación de redes, elaboración de software para cualquier actividad empresarial, adecuar registros contables de empresas y proporcionar asesorías administrativas y financieras.</cite>
+              <cite className='text-base text-gray-300'>Somos una Firma de Auditoría, Inscrita legalmente ante las leyes de nuestro país y ante los entes Supervisores del Sistema Financiero como la Comisión Nacional de Bancos y Seguros (CNBS) calificados en categoría “B” y el Consejo nacional Supervisor de Cooperativas (CONSUCOOP) calificados con Categoría “A”,   con la finalidad principal de realizar nuestro trabajo en forma profesional, cumpliendo con las Normas Internacionales de Información Financiera (NIIF) y las Normas Internacionales de Auditoría (NIA´s), cumpliendo con los estándares establecidos, con ética y dinamismo, para cumplir con nuestras actividades como ser: auditorias financieras, auditorías administrativas, Auditorías Forenses, Auditorías basadas en riesgos, Auditorías especiales, Precios de Transferencia, adecuación de sistemas contables y toda actividad relacionada con nuestra finalidad y dentro de los marcos legales.</cite>
             </p>
             <button
               onClick={() => scrollToSection('servicios')}
-              className="bg-gray-900 hover:bg-blue-600 text-white-900 font-bold py-3 px-8 rounded-lg transition duration-300"
+              className="bg-[#0f4cbc] hover:bg-blue-600 text-white-900 font-bold py-3 px-8 rounded-lg transition duration-300"
             >
               Leer Mas
             </button>
@@ -400,10 +400,7 @@ function App() {
                   <h3 className="text-2xl font-bold">Misión</h3>
                 </div>
                 <p className="text-gray-600 pl-12">
-                  Ofrecer servicios de la más alta calidad en los campos Contable, financiero, auditoría externa,
-                  auditoria forense, auditoría interna, asesoría gerencial, tributaria y de Sistemas, dentro de un marco de ética, objetividad,
-                  integridad, idoneidad e independencia mental, aplicando técnicas modernas de trabajo y
-                  metodologías creativas para lograr un mejor impacto en la gestión de las empresas y su rentabilidad.
+                  Ofrecer servicios de la más alta calidad en las diferentes actividades de las auditorías, mejorar y proteger el valor de la organización proporcionando un aseguramiento, asesoría y análisis en base a riesgos, aplicando técnicas modernas de trabajo y metodologías creativas para lograr un mejor impacto en la gestión de las empresas y su rentabilidad.  
                 </p>
               </div>
 
@@ -470,19 +467,19 @@ function App() {
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
               <ServiceCard
                 title="Auditoria de estados financieros"
-                description="Ofrecemos la certificación de los estados financieros y nuestra opinión como auditores independientes, basados en el cumplimiento de las Normas Internacionales de Información Financiera (NIIF), Cumplimiento de los preceptos legales de los entes Supervisores como la CNBS y CONSUCOOP; Políticas internas y la revisión y adecuación de los procedimientos establecidos, análisis e investigación de los movimientos y saldos de las cuentas de los estados financieros, establecimiento de métodos y procedimientos de control sean éstos técnicos o administrativos."
+                description="Ofrecemos un proceso sistemático de revisión y evaluación de los estados financieros con el objetivo principal es verificar la precisión, integridad y confiabilidad de la información contable y financiera presentada, mediante un examen independente y objetivo, lo que aumenta el valor y la credibilidad de los estados financieros producidos por la administración, para aumentar la confianza de los usuarios, reducir el riesgo del inversor y en consecuencia reducir el costo del capital."
               />
               <ServiceCard
                 title="Servicios de auditoría Interna"
-                description="Siguiendo los pasos de la globalización, ofrecemos los servicios de Auditoría Interna para las empresas, llevando a cabo planes de trabajo para el desarrollo de una fiscalización y revisión de las operaciones en forma eficiente y eficaz durante todo el período contable, además de arqueos sorpresivos y tomas de inventario."
+                description="Siguiendo los pasos de la globalización, ofrecemos los servicios de Auditoría Interna tercerizada para las empresas, llevando a cabo planes de trabajo para el desarrollo de una fiscalización y revisión de las operaciones en forma eficiente y eficaz durante todo el período contable y además de aplicar todos los métodos y procedimientos para una auditoría interna eficiente."
               />
               <ServiceCard
-                title="Ingeniería en Sistemas"
-                description="Nuestra firma asociada LUGON, Auditing Consulting especialistas en sistemas tecnológicos, ha desarrollado el software para la prevención del lavado de activos y financiamiento del terrorismo (PLA/FT), así como el software de monitoreo de operaciones."
+                title="Tecnología"
+                description="Nuestra alianza estratégica con la empresa Lugon Auditing Consulting, S. de R. L., con más de 12 años de experiencia, nos da la oportunidad de ofrecer a nuestros clientes una variedad de productos y servicios que abordan las demandas del sector financiero y asegurador. Estos incluyen soluciones de auditoría, consultoría en infraestructura tecnológica y herramientas innovadoras para la gestión de riesgos, prevención de lavado de activos y cumplimiento normativo. Cada producto esta diseñado para proporcionar a nuestros clientes un valor agregado a las instituciones, ayudándolas a mitigar riesgos y optimizar procesos. "
               />
               <ServiceCard
                 title="Servicios de Asociados"
-                description="Como complemento a nuestros servicios profesionales, contamos con personal asociado a nuestra firma en las especialidades de Sistemas de Información, Ingeniería Civil, Industria, Asesoría Legal y otras."
+                description="Como complemento a nuestros servicios profesionales, contamos con personal asociado a nuestra firma en las especialidades de Sistemas de Información, Ingeniería Civil, Industrial, Asesoría, elaboración de programas basados en riesgos, Asesoría Legal entre especialidades."
               />
             </div>
 
@@ -504,7 +501,7 @@ function App() {
         {/* Nosotros Section */}
         <section id="nosotros" className="py-16 bg-gradient-to-r from-[#546c94] to-[#3c5472] pt-24">
           <div className="container mx-auto px-4">
-            <h2 className="text-3xl font-bold text-center mb-12 font-serif text-white">Nuestro Equipo</h2>
+            <h2 className="text-3xl font-bold text-center mb-12 font-serif text-white">Organización</h2>
             <div className="bg-white rounded-lg shadow-md p-6 mb-12">
               <p className="text-gray-700 mb-6">
                 <strong>DELGADO MARADIAGA Y ASOCIADOS S.DE R.L. </strong> tiene el agrado de presentar nuestro nuevo sitio Web,
@@ -547,23 +544,28 @@ function App() {
                 {showMore ? "Ver menos" : "Ver más"}
               </button>
             </div>
-            {/* <div className="grid md:grid-cols-3 gap-8">
-              <TeamMember
-                name="Lic. Ramon Maradiaga"
-                position="Socio Fundador"
-                bio="Especialista en derecho corporativo con más de 30 años de experiencia."
-              />
+            <div className="grid md:grid-cols-4 gap-8">
               <TeamMember
                 name="Lic. Jorge Delgado"
-                position="Socio Fundador"
-                bio="Experta en derecho familiar y sucesiones, con enfoque humanizado."
+                position="Socio - Director"
+                bio="Cel-3175-3538"
               />
               <TeamMember
-                name="Lic. Leslie Palma"
-                position="Gerente de Operaciones"
-                bio="Especialista en litigio civil y arbitraje, estrategia legal innovadora."
+                name="Lic. Ramon Maradiaga"
+                position="Socio - Gerente"
+                bio="Cel-3175-3542"
               />
-            </div> */}
+              <TeamMember
+                name="Lic. Lucia del Carmen Maradiaga"
+                position="Socio"
+                bio=""
+              />
+              <TeamMember
+                name="Ing. Ramon Eduardo Maradiaga"
+                position="Socio"
+                bio=""
+              />
+            </div>
           </div>
         </section>
 
