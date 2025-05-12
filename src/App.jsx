@@ -1,16 +1,66 @@
-import { useState, useEffect } from 'react'
-import { FaGavel, FaHandshake, FaBook, FaPhone, FaMapMarkerAlt, FaEnvelope, FaClock, FaUserShield, FaBolt, FaBullseye, FaEye } from 'react-icons/fa'
-import { FiMenu, FiX } from 'react-icons/fi'
-import emailjs from '@emailjs/browser'
-import DMLogoImage from './assets/DMLogo.png'
+import { useState, useEffect } from 'react';
+import { FaGavel, FaHandshake, FaBook, FaPhone, FaMapMarkerAlt, FaEnvelope, FaClock, FaUserShield, FaBolt, FaBullseye, FaEye } from 'react-icons/fa';
+import { FiMenu, FiX } from 'react-icons/fi';
+import emailjs from '@emailjs/browser';
+import DMLogoImage from './assets/DMLogo.png';
 
 function App() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [activeSection, setActiveSection] = useState('inicio')
-  const [showMore, setShowMore] = useState(false)
+  // State declarations
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('inicio');
+  const [showMore, setShowMore] = useState(false);
+  const [openAccordion, setOpenAccordion] = useState(null);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    message: ''
+  });
+  const [formStatus, setFormStatus] = useState({
+    submitting: false,
+    success: null,
+    error: null
+  });
+  const [formErrors, setFormErrors] = useState({
+    name: null,
+    email: null,
+    phone: null,
+    message: null
+  });
+
+  // Initialize EmailJS
+  useEffect(() => {
+    emailjs.init("F_nbCg0rutBQqBcjD");
+  }, []);
+
+  // Menu toggle function
+  const toggleMenu = () => {
+    setMobileMenuOpen(!mobileMenuOpen);
+  };
+
+  // Scroll to section function
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId);
+    const navbarHeight = document.querySelector('nav').offsetHeight;
+
+    if (element) {
+      const elementPosition = element.offsetTop - navbarHeight;
+      window.scrollTo({
+        top: elementPosition,
+        behavior: 'smooth'
+      });
+      setActiveSection(sectionId);
+      setMobileMenuOpen(false);
+    }
+  };
+
+  // Accordion toggle function
+  const toggleAccordion = (index) => {
+    setOpenAccordion(openAccordion === index ? null : index);
+  };
 
   // Accordion Item Component
-  const AccordionItem = ({ title, items, isOpen, toggleAccordion }) => {
+  const AccordionItem = ({ title, items, description, details, isOpen, toggleAccordion }) => {
     return (
       <div className="border-b border-[#546c94] shadow-lg">
         <button
@@ -30,16 +80,30 @@ function App() {
         </button>
         {isOpen && (
           <div className="py-4 px-6 bg-[#3c5472]">
+            {description && <p className="text-white mb-4">{description}</p>}
+            {details && (
+              <div className="mb-4">
+                {details.map((detail, index) => (
+                  <p key={`detail-${index}`} className="text-white mb-2">
+                    {detail.startsWith('**') ? (
+                      <strong>{detail.replace(/\*\*/g, '')}</strong>
+                    ) : (
+                      detail
+                    )}
+                  </p>
+                ))}
+              </div>
+            )}
             <ul className="list-disc pl-5 space-y-2">
               {items.map((item, index) => (
-                <li key={index} className="text-white">{item}</li>
+                <li key={`item-${index}`} className="text-white">{item}</li>
               ))}
             </ul>
           </div>
         )}
       </div>
-    )
-  }
+    );
+  };
 
   // ServiceCard Component
   const ServiceCard = ({ title, description }) => {
@@ -48,8 +112,8 @@ function App() {
         <h3 className="text-xl font-semibold mb-3 text-gray-800">{title}</h3>
         <p className="text-gray-600">{description}</p>
       </div>
-    )
-  }
+    );
+  };
 
   // TeamMember Component
   const TeamMember = ({ name, position, bio }) => {
@@ -60,14 +124,8 @@ function App() {
         <p className="text-blue-500 mb-3">{position}</p>
         <p className="text-gray-600">{bio}</p>
       </div>
-    )
-  }
-
-  const [openAccordion, setOpenAccordion] = useState(null)
-
-  const toggleAccordion = (index) => {
-    setOpenAccordion(openAccordion === index ? null : index)
-  }
+    );
+  };
 
   // Accordion data
   const accordionData = [
@@ -81,17 +139,20 @@ function App() {
       ],
     },
     {
-      title: "Auditorias y consultorías que desarollamos",
+      title: "Consultorías",
       items: [
-        "Auditorías Financieras con opinión de auditores independientes.",
-        "Servicios de Auditoría Interna para las empresas.",
-        "Auditorías Especiales.",
-        "Auditoría Forense.",
-        "Organización Administrativa y Financiera.",
-        "Servicios de Contabilidad.",
-        "Precios de Transferencia.",
-        "Auditoría Fiscal.",
+        "Elaborar un plan de acción. Crear estrategias a seguir en el corto y mediano plazo tomando en consideración los resultados encontrados en la auditoría y por el otro, del objetivo que tenga la organización.",
+        "Crear un plan para recorte de gastos o una planeación fiscal para el pago de impuestos, replantear el plan de negocios o buscar alternativas de financiamiento para evitar que se sigan incrementando las deudas.",
+        "Auxiliar en la puesta en marcha. La consultoría financiera también puede ayudar en la forma en que se implementa el plan de acción, para que se haga de manera óptima.",
+        "Evaluar los resultados. Revisar cuáles son las dificultades que se presentaron para no obtener los resultados esperados y si se trata de factores externos o internos.",
       ],
+      description: "Como estrategia de crecimiento empresarial, hacemos evaluaciones y realizamos auditorías para conocer la situación actual en la que se encuentra la organización para crear una estrategia integral que permita optimizar los recursos con los que se cuenta, para lograr las metas del plan de negocios. Entre las principales consultorías que ofrecemos están la consultoría financiera que puede abarcar, como las relacionadas con el entorno fiscal y administrativo del negocio. Sus principales tareas estarían enfocadas en lo siguiente:",
+      details: [
+        "",
+        "",
+        "",
+        ""
+      ]
     },
     {
       title: "Seminarios",
@@ -106,220 +167,99 @@ function App() {
         "Riesgo Operativo.",
       ],
     },
-  ]
+  ];
 
-  // Estado del formulario
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    message: ''
-  })
-
-  const [formStatus, setFormStatus] = useState({
-    submitting: false,
-    success: null,
-    error: null
-  })
-
-  const [formErrors, setFormErrors] = useState({
-    name: null,
-    email: null,
-    phone: null,
-    message: null
-  })
-
-  // Inicializa EmailJS cuando el componente es montado
-  useEffect(() => {
-    emailjs.init("F_nbCg0rutBQqBcjD")/*Esto de aca es la public Key, Se encuentra en /CredencialesEmailJS.txt*/
-  }, [])
-
-  const toggleMenu = () => {
-    setMobileMenuOpen(!mobileMenuOpen)
-  }
-
-  const scrollToSection = (sectionId) => {
-    const element = document.getElementById(sectionId)
-    const navbarHeight = document.querySelector('nav').offsetHeight
-
-    if (element) {
-      const elementPosition = element.offsetTop - navbarHeight
-      window.scrollTo({
-        top: elementPosition,
-        behavior: 'smooth'
-      })
-      setActiveSection(sectionId)
-      setMobileMenuOpen(false)
-    }
-  }
-
-  // Funcion para validacion del formulario
+  // Form validation
   const validateForm = (data) => {
-    const errors = {}
-
-    // Validacion del nombre
-    if (!data.name.trim()) {
-      errors.name = 'El nombre es requerido'
-    }
-
-    // Validacion del correo
+    const errors = {};
+    if (!data.name.trim()) errors.name = 'El nombre es requerido';
     if (!data.email.trim()) {
-      errors.email = 'El correo electrónico es requerido'
-    } else {
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-      if (!emailRegex.test(data.email.trim())) {
-        errors.email = 'Por favor ingrese un correo electrónico válido'
-      }
+      errors.email = 'El correo electrónico es requerido';
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email.trim())) {
+      errors.email = 'Por favor ingrese un correo electrónico válido';
     }
-
-    // Validacion del mensaje
-    if (!data.message.trim()) {
-      errors.message = 'El mensaje es requerido'
-    }
-
-    return errors
-  }
+    if (!data.message.trim()) errors.message = 'El mensaje es requerido';
+    return errors;
+  };
 
   const handleInputChange = (e) => {
-    const { id, value } = e.target
-    setFormData(prevData => ({
-      ...prevData,
-      [id]: value
-    }))
-
-    // Limpia los errores cuando el usuario comienza a teclear
-    if (formErrors[id]) {
-      setFormErrors(prev => ({
-        ...prev,
-        [id]: null
-      }))
-    }
-  }
+    const { id, value } = e.target;
+    setFormData(prev => ({ ...prev, [id]: value }));
+    if (formErrors[id]) setFormErrors(prev => ({ ...prev, [id]: null }));
+  };
 
   const handleBlur = (e) => {
-    const { id, value } = e.target
-
-    // Validar este campo solo en borroso
-    const fieldErrors = validateForm({
-      ...formData,
-      [id]: value
-    })
-
-    if (fieldErrors[id]) {
-      setFormErrors(prev => ({
-        ...prev,
-        [id]: fieldErrors[id]
-      }))
-    }
-  }
+    const { id, value } = e.target;
+    const fieldErrors = validateForm({ ...formData, [id]: value });
+    if (fieldErrors[id]) setFormErrors(prev => ({ ...prev, [id]: fieldErrors[id] }));
+  };
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-
-    // Validar todos los campos del formulario
-    const errors = validateForm(formData)
-
-    // Si hay errores, los muestra y cancela el envio
+    e.preventDefault();
+    const errors = validateForm(formData);
+    
     if (Object.keys(errors).length > 0) {
-      setFormErrors(errors)
-      setFormStatus({
-        submitting: false,
-        success: null,
-        error: 'Por favor corrija los errores en el formulario.'
-      })
-      return
+      setFormErrors(errors);
+      setFormStatus({ submitting: false, success: null, error: 'Por favor corrija los errores en el formulario.' });
+      return;
     }
 
-    setFormStatus({
-      submitting: true,
-      success: null,
-      error: null
-    })
-
-    // EmailJS Configuracion
-    const serviceId = 'service_bb1ywxq'
-    const templateId = 'template_hqmvdvy'
-
-    // Prepare template parameters
-    const templateParams = {
-      from_name: formData.name,
-      reply_to: formData.email,
-      phone: formData.phone || 'No proporcionado',
-      message: formData.message
-    }
+    setFormStatus({ submitting: true, success: null, error: null });
 
     try {
-      // Enviar correo utilizando EmailJS
-      await emailjs.send(serviceId, templateId, templateParams)
+      await emailjs.send(
+        'service_bb1ywxq',
+        'template_hqmvdvy',
+        {
+          from_name: formData.name,
+          reply_to: formData.email,
+          phone: formData.phone || 'No proporcionado',
+          message: formData.message
+        }
+      );
 
       setFormStatus({
         submitting: false,
         success: 'Mensaje enviado correctamente. Nos pondremos en contacto pronto.',
         error: null
-      })
+      });
 
-      // Resetear formulario
       setFormData({
         name: '',
         email: '',
         phone: '',
         message: ''
-      })
+      });
     } catch (error) {
-      console.error('Error al enviar el formulario:', error)
+      console.error('Error al enviar el formulario:', error);
       setFormStatus({
         submitting: false,
         success: null,
         error: 'Error al enviar el mensaje. Por favor intente nuevamente.'
-      })
+      });
     }
-  }
+  };
 
   return (
     <div className="min-h-screen flex flex-col font-sans">
-      {/* Navegacion */}
+      {/* Navigation */}
       <nav className="bg-gray-50 text-black shadow-lg sticky top-0 z-50 h-24">
         <div className="container mx-auto px-4 py-3 flex justify-between items-center">
           <div className="flex items-center space-x-2">
-            <img
-              src={DMLogoImage}
-              alt="Delgado Maradiaga y Asociados"
-              className='h-24'
-            />
+            <img src={DMLogoImage} alt="Delgado Maradiaga y Asociados" className='h-24' />
           </div>
 
-          {/* Navegacion de Escritorio */}
+          {/* Desktop Navigation */}
           <div className="hidden md:flex space-x-6">
-            <button
-              onClick={() => scrollToSection('inicio')}
-              className={`hover:text-[002366] transition ${activeSection === 'inicio' ? 'font-bold text-[002366]' : ''}`}
-            >
-              Inicio
-            </button>
-            <button
-              onClick={() => scrollToSection('filosofia')}
-              className={`hover:text-[002366] transition ${activeSection === 'filosofia' ? 'font-bold text-[002366]' : ''}`}
-            >
-              Filosofía
-            </button>
-            <button
-              onClick={() => scrollToSection('servicios')}
-              className={`hover:text-[002366] transition ${activeSection === 'servicios' ? 'font-bold text-[002366]' : ''}`}
-            >
-              Servicios
-            </button>
-            <button
-              onClick={() => scrollToSection('nosotros')}
-              className={`hover:text-[002366] transition ${activeSection === 'nosotros' ? 'font-bold text-[002366]' : ''}`}
-            >
-              Nosotros
-            </button>
-            <button
-              onClick={() => scrollToSection('contacto')}
-              className={`hover:text-[002366] transition ${activeSection === 'contacto' ? 'font-bold text-[002366]' : ''}`}
-            >
-              Contacto
-            </button>
+            {['inicio', 'filosofia', 'servicios', 'nosotros', 'contacto'].map((section) => (
+              <button
+                key={section}
+                onClick={() => scrollToSection(section)}
+                className={`hover:text-[002366] transition ${activeSection === section ? 'font-bold text-[002366]' : ''}`}
+              >
+                {section.charAt(0).toUpperCase() + section.slice(1)}
+              </button>
+            ))}
           </div>
 
           {/* Mobile Menu Button */}
@@ -333,36 +273,15 @@ function App() {
           <div className="md:hidden fixed inset-0 bg-gray-50 bg-opacity-95 z-40 pt-24">
             <div className="container mx-auto px-4">
               <div className="flex flex-col space-y-6 py-8">
-                <button
-                  onClick={() => scrollToSection('inicio')}
-                  className={`text-xl py-3 hover:text-[002366] transition ${activeSection === 'inicio' ? 'font-bold text-[002366]' : ''}`}
-                >
-                  Inicio
-                </button>
-                <button
-                  onClick={() => scrollToSection('filosofia')}
-                  className={`text-xl py-3 hover:text-[002366] transition ${activeSection === 'filosofia' ? 'font-bold text-[002366]' : ''}`}
-                >
-                  Filosofía
-                </button>
-                <button
-                  onClick={() => scrollToSection('servicios')}
-                  className={`text-xl py-3 hover:text-[002366] transition ${activeSection === 'servicios' ? 'font-bold text-[002366]' : ''}`}
-                >
-                  Servicios
-                </button>
-                <button
-                  onClick={() => scrollToSection('nosotros')}
-                  className={`text-xl py-3 hover:text-[002366] transition ${activeSection === 'nosotros' ? 'font-bold text-[002366]' : ''}`}
-                >
-                  Nosotros
-                </button>
-                <button
-                  onClick={() => scrollToSection('contacto')}
-                  className={`text-xl py-3 hover:text-[002366] transition ${activeSection === 'contacto' ? 'font-bold text-[002366]' : ''}`}
-                >
-                  Contacto
-                </button>
+                {['inicio', 'filosofia', 'servicios', 'nosotros', 'contacto'].map((section) => (
+                  <button
+                    key={section}
+                    onClick={() => scrollToSection(section)}
+                    className={`text-xl py-3 hover:text-[002366] transition ${activeSection === section ? 'font-bold text-[002366]' : ''}`}
+                  >
+                    {section.charAt(0).toUpperCase() + section.slice(1)}
+                  </button>
+                ))}
               </div>
             </div>
           </div>
@@ -375,7 +294,7 @@ function App() {
           <div className="container mx-auto px-4 text-center">
             <h1 className="text-4xl md:text-6xl font-bold mb-6 font-serif">Auditores y Consultores</h1>
             <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
-              <cite className='text-base text-gray-300'>Somos una Firma de Auditoría, Inscrita legalmente ante las leyes de nuestro país y ante los entes Supervisores del Sistema Financiero como la Comisión Nacional de Bancos y Seguros (CNBS) calificados en categoría “B” y el Consejo nacional Supervisor de Cooperativas (CONSUCOOP) calificados con Categoría “A”,   con la finalidad principal de realizar nuestro trabajo en forma profesional, cumpliendo con las Normas Internacionales de Información Financiera (NIIF) y las Normas Internacionales de Auditoría (NIA´s), cumpliendo con los estándares establecidos, con ética y dinamismo, para cumplir con nuestras actividades como ser: auditorias financieras, auditorías administrativas, Auditorías Forenses, Auditorías basadas en riesgos, Auditorías especiales, Precios de Transferencia, adecuación de sistemas contables y toda actividad relacionada con nuestra finalidad y dentro de los marcos legales.</cite>
+              <cite className='text-base text-gray-300'>Somos una Firma de Auditoría, Inscrita legalmente ante las leyes de nuestro país y ante los entes Supervisores del Sistema Financiero como la Comisión Nacional de Bancos y Seguros (CNBS) calificados en categoría "B" y el Consejo nacional Supervisor de Cooperativas (CONSUCOOP) calificados con Categoría "A", con la finalidad principal de realizar nuestro trabajo en forma profesional, cumpliendo con las Normas Internacionales de Información Financiera (NIIF) y las Normas Internacionales de Auditoría (NIA´s), cumpliendo con los estándares establecidos, con ética y dinamismo, para cumplir con nuestras actividades como ser: auditorias financieras, auditorías administrativas, Auditorías Forenses, Auditorías basadas en riesgos, Auditorías especiales, Precios de Transferencia, adecuación de sistemas contables y toda actividad relacionada con nuestra finalidad y dentro de los marcos legales.</cite>
             </p>
             <button
               onClick={() => scrollToSection('servicios')}
@@ -391,7 +310,6 @@ function App() {
           <div className="container mx-auto px-4">
             <h2 className="text-3xl font-bold text-center mb-12 font-serif text-white">Nuestra Filosofía</h2>
 
-            {/* Vision y Mision - MOVED TO TOP */}
             <div className="grid md:grid-cols-2 gap-8 mb-16">
               {/* Mision */}
               <div className="bg-white p-8 rounded-lg shadow-md">
@@ -417,43 +335,20 @@ function App() {
               </div>
             </div>
 
-            {/* Valores de la Matriz - MOVED BELOW */}
             <div className="grid md:grid-cols-5 gap-6">
-              <div className="bg-white p-6 rounded-lg shadow-md text-center">
-                <FaHandshake className="text-[002366] text-4xl mx-auto mb-4" />
-                <h3 className="text-xl font-bold mb-3">Integridad</h3>
-                <p className="text-gray-600">
-                  En la forma de actuar tanto en el campo profesional como personal de todo nuestro equipo.
-                </p>
-              </div>
-              <div className="bg-white p-6 rounded-lg shadow-md text-center">
-                <FaGavel className="text-[002366] text-4xl mx-auto mb-4" />
-                <h3 className="text-xl font-bold mb-3">Legalidad</h3>
-                <p className="text-gray-600">
-                  Estudio, profundo conocimiento y respeto.
-                </p>
-              </div>
-              <div className="bg-white p-6 rounded-lg shadow-md text-center">
-                <FaBook className="text-[002366] text-4xl mx-auto mb-4" />
-                <h3 className="text-xl font-bold mb-3">Compromiso</h3>
-                <p className="text-gray-600">
-                  Nuestro máximo esfuerzo por un trabajo con excelencia.
-                </p>
-              </div>
-              <div className="bg-white p-6 rounded-lg shadow-md text-center">
-                <FaUserShield className="text-[002366] text-4xl mx-auto mb-4" />
-                <h3 className="text-xl font-bold mb-3">Confiabilidad</h3>
-                <p className="text-gray-600">
-                  Con la información que nos proporcionan los clientes y con el producto que nuestra firma produce.
-                </p>
-              </div>
-              <div className="bg-white p-6 rounded-lg shadow-md text-center">
-                <FaBolt className="text-[002366] text-4xl mx-auto mb-4" />
-                <h3 className="text-xl font-bold mb-3">Eficiencia</h3>
-                <p className="text-gray-600">
-                  En tiempo y resultados.
-                </p>
-              </div>
+              {[
+                { icon: FaHandshake, title: "Integridad", text: "En la forma de actuar tanto en el campo profesional como personal de todo nuestro equipo." },
+                { icon: FaGavel, title: "Legalidad", text: "Estudio, profundo conocimiento y respeto." },
+                { icon: FaBook, title: "Compromiso", text: "Nuestro máximo esfuerzo por un trabajo con excelencia." },
+                { icon: FaUserShield, title: "Confiabilidad", text: "Con la información que nos proporcionan los clientes y con el producto que nuestra firma produce." },
+                { icon: FaBolt, title: "Eficiencia", text: "En tiempo y resultados." }
+              ].map((item, index) => (
+                <div key={index} className="bg-white p-6 rounded-lg shadow-md text-center">
+                  <item.icon className="text-[002366] text-4xl mx-auto mb-4" />
+                  <h3 className="text-xl font-bold mb-3">{item.title}</h3>
+                  <p className="text-gray-600">{item.text}</p>
+                </div>
+              ))}
             </div>
           </div>
         </section>
@@ -463,33 +358,37 @@ function App() {
           <div className="container mx-auto px-4">
             <h2 className="text-3xl font-bold text-center mb-12 font-serif">Nuestros Servicios</h2>
 
-            {/* Service Cards */}
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-              <ServiceCard
-                title="Auditoria de estados financieros"
-                description="Ofrecemos un proceso sistemático de revisión y evaluación de los estados financieros con el objetivo principal es verificar la precisión, integridad y confiabilidad de la información contable y financiera presentada, mediante un examen independente y objetivo, lo que aumenta el valor y la credibilidad de los estados financieros producidos por la administración, para aumentar la confianza de los usuarios, reducir el riesgo del inversor y en consecuencia reducir el costo del capital."
-              />
-              <ServiceCard
-                title="Servicios de auditoría Interna"
-                description="Siguiendo los pasos de la globalización, ofrecemos los servicios de Auditoría Interna tercerizada para las empresas, llevando a cabo planes de trabajo para el desarrollo de una fiscalización y revisión de las operaciones en forma eficiente y eficaz durante todo el período contable y además de aplicar todos los métodos y procedimientos para una auditoría interna eficiente."
-              />
-              <ServiceCard
-                title="Tecnología"
-                description="Nuestra alianza estratégica con la empresa Lugon Auditing Consulting, S. de R. L., con más de 12 años de experiencia, nos da la oportunidad de ofrecer a nuestros clientes una variedad de productos y servicios que abordan las demandas del sector financiero y asegurador. Estos incluyen soluciones de auditoría, consultoría en infraestructura tecnológica y herramientas innovadoras para la gestión de riesgos, prevención de lavado de activos y cumplimiento normativo. Cada producto esta diseñado para proporcionar a nuestros clientes un valor agregado a las instituciones, ayudándolas a mitigar riesgos y optimizar procesos. "
-              />
-              <ServiceCard
-                title="Servicios de Asociados"
-                description="Como complemento a nuestros servicios profesionales, contamos con personal asociado a nuestra firma en las especialidades de Sistemas de Información, Ingeniería Civil, Industrial, Asesoría, elaboración de programas basados en riesgos, Asesoría Legal entre especialidades."
-              />
+              {[
+                {
+                  title: "Auditoria de estados financieros",
+                  description: "Ofrecemos un proceso sistemático de revisión y evaluación de los estados financieros con el objetivo principal es verificar la precisión, integridad y confiabilidad de la información contable y financiera presentada, mediante un examen independente y objetivo, lo que aumenta el valor y la credibilidad de los estados financieros producidos por la administración, para aumentar la confianza de los usuarios, reducir el riesgo del inversor y en consecuencia reducir el costo del capital."
+                },
+                {
+                  title: "Servicios de auditoría Interna",
+                  description: "Siguiendo los pasos de la globalización, ofrecemos los servicios de Auditoría Interna tercerizada para las empresas, llevando a cabo planes de trabajo para el desarrollo de una fiscalización y revisión de las operaciones en forma eficiente y eficaz durante todo el período contable y además de aplicar todos los métodos y procedimientos para una auditoría interna eficiente."
+                },
+                {
+                  title: "Tecnología",
+                  description: "Nuestra alianza estratégica con la empresa Lugon Auditing Consulting, S. de R. L., con más de 12 años de experiencia, nos da la oportunidad de ofrecer a nuestros clientes una variedad de productos y servicios que abordan las demandas del sector financiero y asegurador. Estos incluyen soluciones de auditoría, consultoría en infraestructura tecnológica y herramientas innovadoras para la gestión de riesgos, prevención de lavado de activos y cumplimiento normativo. Cada producto esta diseñado para proporcionar a nuestros clientes un valor agregado a las instituciones, ayudándolas a mitigar riesgos y optimizar procesos."
+                },
+                {
+                  title: "Servicios de Asociados",
+                  description: "Como complemento a nuestros servicios profesionales, contamos con personal asociado a nuestra firma en las especialidades de Sistemas de Información, Ingeniería Civil, Industrial, Asesoría, elaboración de programas basados en riesgos, Asesoría Legal entre especialidades."
+                }
+              ].map((service, index) => (
+                <ServiceCard key={index} title={service.title} description={service.description} />
+              ))}
             </div>
 
-            {/* Accordion Section */}
             <div className="mt-8 border rounded-lg overflow-hidden shadow-md">
               {accordionData.map((item, index) => (
                 <AccordionItem
                   key={index}
                   title={item.title}
                   items={item.items}
+                  description={item.description}
+                  details={item.details}
                   isOpen={openAccordion === index}
                   toggleAccordion={() => toggleAccordion(index)}
                 />
@@ -545,31 +444,19 @@ function App() {
               </button>
             </div>
             <div className="grid md:grid-cols-4 gap-8">
-              <TeamMember
-                name="Lic. Jorge Delgado"
-                position="Socio - Director"
-                bio="Cel-3175-3538"
-              />
-              <TeamMember
-                name="Lic. Ramon Maradiaga"
-                position="Socio - Gerente"
-                bio="Cel-3175-3542"
-              />
-              <TeamMember
-                name="Lic. Lucia del Carmen Maradiaga"
-                position="Socio"
-                bio=""
-              />
-              <TeamMember
-                name="Ing. Ramon Eduardo Maradiaga"
-                position="Socio"
-                bio=""
-              />
+              {[
+                { name: "Lic. Jorge Delgado", position: "Socio - Director", bio: "Cel-3175-3538" },
+                { name: "Lic. Ramon Maradiaga", position: "Socio - Gerente", bio: "Cel-3175-3542" },
+                { name: "Lic. Lucia del Carmen Maradiaga", position: "Socio", bio: "" },
+                { name: "Ing. Ramon Eduardo Maradiaga", position: "Socio", bio: "" }
+              ].map((member, index) => (
+                <TeamMember key={index} {...member} />
+              ))}
             </div>
           </div>
         </section>
 
-        {/* Contacto Section - Incluye implementacions EmailJS */}
+        {/* Contacto Section */}
         <section id="contacto" className="py-16 bg-gray-900 text-white pt-24">
           <div className="container mx-auto px-4">
             <h2 className="text-3xl font-bold text-center mb-12 font-serif">Contáctenos</h2>
@@ -610,9 +497,7 @@ function App() {
                       onBlur={handleBlur}
                       required
                     />
-                    {formErrors.name && (
-                      <p className="text-red-500 text-sm mt-1">{formErrors.name}</p>
-                    )}
+                    {formErrors.name && <p className="text-red-500 text-sm mt-1">{formErrors.name}</p>}
                   </div>
 
                   <div>
@@ -627,9 +512,7 @@ function App() {
                       onBlur={handleBlur}
                       required
                     />
-                    {formErrors.email && (
-                      <p className="text-red-500 text-sm mt-1">{formErrors.email}</p>
-                    )}
+                    {formErrors.email && <p className="text-red-500 text-sm mt-1">{formErrors.email}</p>}
                   </div>
 
                   <div>
@@ -643,9 +526,7 @@ function App() {
                       onChange={handleInputChange}
                       onBlur={handleBlur}
                     />
-                    {formErrors.phone && (
-                      <p className="text-red-500 text-sm mt-1">{formErrors.phone}</p>
-                    )}
+                    {formErrors.phone && <p className="text-red-500 text-sm mt-1">{formErrors.phone}</p>}
                   </div>
 
                   <div>
@@ -660,12 +541,9 @@ function App() {
                       onBlur={handleBlur}
                       required
                     ></textarea>
-                    {formErrors.message && (
-                      <p className="text-red-500 text-sm mt-1">{formErrors.message}</p>
-                    )}
+                    {formErrors.message && <p className="text-red-500 text-sm mt-1">{formErrors.message}</p>}
                   </div>
 
-                  {/* Mensajes de estado del formulario */}
                   {formStatus.error && (
                     <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative">
                       {formStatus.error}
@@ -703,10 +581,16 @@ function App() {
             <div>
               <h4 className="font-bold mb-4 text-white-900">Enlaces Rápidos</h4>
               <ul className="space-y-2">
-                <li><button onClick={() => scrollToSection('inicio')} className="hover:text-blue-600 transition">Inicio</button></li>
-                <li><button onClick={() => scrollToSection('servicios')} className="hover:text-blue-600 transition">Servicios</button></li>
-                <li><button onClick={() => scrollToSection('nosotros')} className="hover:text-blue-600 transition">Nosotros</button></li>
-                <li><button onClick={() => scrollToSection('contacto')} className="hover:text-blue-600 transition">Contacto</button></li>
+                {['inicio', 'servicios', 'nosotros', 'contacto'].map((section) => (
+                  <li key={section}>
+                    <button 
+                      onClick={() => scrollToSection(section)} 
+                      className="hover:text-blue-600 transition"
+                    >
+                      {section.charAt(0).toUpperCase() + section.slice(1)}
+                    </button>
+                  </li>
+                ))}
               </ul>
             </div>
             <div>
@@ -733,7 +617,7 @@ function App() {
         </div>
       </footer>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
